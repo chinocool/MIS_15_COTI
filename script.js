@@ -228,9 +228,11 @@ function showCopyFeedback(){
 //////////////////////////////////////////////////
 // EFECTO DE FOTOS
 //////////////////////////////////////////////////
-const images = document.querySelectorAll(".track img");
 function setActive(){
-  let center = window.innerWidth / 2;
+  const sliderRect = slider.getBoundingClientRect();
+  const center = sliderRect.left + sliderRect.width / 2;
+
+  const images = document.querySelectorAll(".track img");
 
   images.forEach(img => {
     const rect = img.getBoundingClientRect();
@@ -245,10 +247,11 @@ function setActive(){
 }
 
 // correr al cargar
-setActive();
+setTimeout(setActive, 300);
 
 // correr cuando se mueve el slider
 slider.addEventListener("touchmove", setActive);
-window.addEventListener("scroll", setActive);
+slider.addEventListener("touchend", setActive);
+window.addEventListener("resize", setActive);
   
 });
