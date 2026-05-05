@@ -110,6 +110,14 @@ button, .btn {
   background:rgba(255,255,255,0.02);
 }
 
+.gift-box img {
+  width:60px;
+  height:auto;
+  object-fit:contain;
+  filter:brightness(1.2);
+  margin-bottom:10px;
+}
+
 /* FONDO GLITTER */
 canvas {
   position:fixed;
