@@ -1,4 +1,21 @@
 /* =========================
+   CARGA PREMIUM
+========================= */
+
+/* oculta todo al inicio */
+html {
+  opacity:0;
+  transform:scale(1.02);
+}
+
+/* cuando carga */
+html.loaded {
+  opacity:1;
+  transform:scale(1);
+  transition:all 1.2s ease;
+}
+
+/* =========================
    BASE
 ========================= */
 body {
