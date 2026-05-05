@@ -92,18 +92,16 @@ let isDown = false;
 
 function setupInfinite(){
 
-  const items = track.querySelectorAll("img");
+  const items = Array.from(track.children);
 
+  // clonar solo una vez cada lado (no duplicar todo en cada lado)
   items.forEach(item=>{
-    const cloneStart = item.cloneNode(true);
-    const cloneEnd = item.cloneNode(true);
-
-    track.insertBefore(cloneStart, track.firstChild);
-    track.appendChild(cloneEnd);
+    const clone = item.cloneNode(true);
+    track.appendChild(clone);
   });
 
-  const width = track.scrollWidth / 3;
-  current = -width;
+  // posicion inicial
+  current = 0;
   track.style.transform = `translateX(${current}px)`;
 }
 
@@ -131,17 +129,22 @@ if(slider){
 }
 
 function fixLoop(){
-  const width = track.scrollWidth / 3;
+  const itemWidth = track.querySelector("img").offsetWidth + 20; // gap
+  const totalItems = track.children.length;
+  const visibleItems = totalItems / 2;
 
-  if(current > 0){
-    current = -width;
+  const maxScroll = itemWidth * visibleItems;
+
+  if(Math.abs(current) >= maxScroll){
+    current = 0;
+    track.style.transition = "none";
+    track.style.transform = `translateX(${current}px)`;
+
+    // fuerza reflow para que no salte
+    track.offsetHeight;
+
+    track.style.transition = ".3s ease";
   }
-
-  if(current < -width * 2){
-    current = -width;
-  }
-
-  track.style.transform = `translateX(${current}px)`;
 }
 
 //////////////////////////////////////////////////
