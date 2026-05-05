@@ -148,8 +148,8 @@ if(slider){
 
 function applyMomentum(){
 
-  let momentum = velocity * 8;
-  current += momentum;
+  let momentum = velocity * 4;
+  current += momentum * 0.6;
 
   snapToClosest();
 }
@@ -186,7 +186,8 @@ function snapToClosest(){
 
     current += offset;
 
-    track.style.transition = "transform .5s cubic-bezier(.22,.61,.36,1)";
+    //track.style.transition = "transform .5s cubic-bezier(.22,.61,.36,1)";
+    track.style.transition = "transform .8s cubic-bezier(0.22, 1, 0.36, 1)";
     track.style.transform = `translateX(${current}px)`;
 
     setTimeout(()=>{
@@ -258,7 +259,7 @@ function setActive(){
 function startAutoplay(){
 
   autoPlayInterval = setInterval(()=>{
-    current -= 250; // velocidad autoplay
+    current -= 120; // velocidad autoplay
     snapToClosest();
   },3000);
 }
