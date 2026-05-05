@@ -8,31 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     document.body.classList.add("loaded");
   }, 1200);*/
-
-const images = document.querySelectorAll(".track img");
-
-function setActive(){
-  let center = window.innerWidth / 2;
-
-  images.forEach(img => {
-    const rect = img.getBoundingClientRect();
-    const imgCenter = rect.left + rect.width / 2;
-
-    if(Math.abs(center - imgCenter) < rect.width / 2){
-      img.classList.add("active");
-    } else {
-      img.classList.remove("active");
-    }
-  });
-}
-
-// correr al cargar
-setActive();
-
-// correr cuando se mueve el slider
-slider.addEventListener("touchmove", setActive);
-window.addEventListener("scroll", setActive);
-  
+ 
 //////////////////////////////////////////////////
 // ENTER
 //////////////////////////////////////////////////
@@ -248,5 +224,31 @@ function showCopyFeedback(){
     btn.innerText = "Copiar alias";
   },1500);
 }
+
+//////////////////////////////////////////////////
+// EFECTO DE FOTOS
+//////////////////////////////////////////////////
+const images = document.querySelectorAll(".track img");
+function setActive(){
+  let center = window.innerWidth / 2;
+
+  images.forEach(img => {
+    const rect = img.getBoundingClientRect();
+    const imgCenter = rect.left + rect.width / 2;
+
+    if(Math.abs(center - imgCenter) < rect.width / 2){
+      img.classList.add("active");
+    } else {
+      img.classList.remove("active");
+    }
+  });
+}
+
+// correr al cargar
+setActive();
+
+// correr cuando se mueve el slider
+slider.addEventListener("touchmove", setActive);
+window.addEventListener("scroll", setActive);
   
 });
