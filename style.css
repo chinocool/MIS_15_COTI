@@ -124,6 +124,12 @@ h2.lux::after {
 /* =========================
    TEXTO
 ========================= */
+/* 🔗 LINKS SIN SUBRAYADO */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .subtitle {
   font-family: 'Cormorant Garamond', serif;
   font-size:18px;
