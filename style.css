@@ -317,6 +317,46 @@ canvas {
   }
 }
 
+/* 🔊 BOTÓN MÚSICA */
+#music-control {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+
+  width:50px;
+  height:50px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+  background:rgba(0,0,0,0.5);
+  color:#d4af37;
+  font-size:20px;
+
+  border:1px solid rgba(212,175,55,0.5);
+
+  backdrop-filter:blur(6px);
+  cursor:pointer;
+
+  z-index:20;
+
+  transition:all 0.3s ease;
+}
+
+#music-control:hover {
+  box-shadow:
+    0 0 10px rgba(212,175,55,0.6),
+    0 0 25px rgba(212,175,55,0.4);
+}
+
+/* estado apagado */
+#music-control.off {
+  color:#888;
+  border-color:#555;
+}
+
 /* =========================
    MOBILE
 ========================= */
