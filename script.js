@@ -15,26 +15,16 @@ if(isMobile){
   }
 }
 
-function updateUI(){
+function updateDots(){
   if(!isMobile) return;
-
-  sections.forEach((s,i)=>{
-    s.classList.toggle("active", i===currentPage);
-  });
 
   [...dotsContainer.children].forEach((d,i)=>{
     d.classList.toggle("active", i===currentPage);
   });
 }
 
-// MOBILE SWIPE
+// SWIPE MOBILE
 if(isMobile){
-
-  function goToPage(index){
-    currentPage = Math.max(0, Math.min(index, total-1));
-    pages.style.transform = `translateX(-${currentPage * 100}vw)`;
-    updateUI();
-  }
 
   let startX = 0;
 
@@ -45,11 +35,16 @@ if(isMobile){
   document.addEventListener("touchend", e=>{
     let diff = e.changedTouches[0].clientX - startX;
 
-    if(diff > 60) goToPage(currentPage - 1);
-    if(diff < -60) goToPage(currentPage + 1);
+    if(diff > 50) currentPage--;
+    if(diff < -50) currentPage++;
+
+    currentPage = Math.max(0, Math.min(currentPage, total-1));
+
+    pages.style.transform = `translateX(-${currentPage * 100}vw)`;
+    updateDots();
   });
 
-  updateUI();
+  updateDots();
 }
 
 // ENTER
@@ -79,3 +74,37 @@ setInterval(()=>{
 
   el.innerHTML = `${d} días · ${h} hs · ${m} min`;
 },1000);
+
+// GLITTER
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<100;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*5,
+    s:Math.random()*0.4
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle="rgba(212,175,55,0.3)";
+    ctx.fill();
+
+    p.y += p.s;
+    if(p.y > canvas.height) p.y = 0;
+  });
+}
+
+setInterval(draw,30);
