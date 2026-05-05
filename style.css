@@ -1,11 +1,12 @@
 body {
   margin:0;
-  font-family:Arial;
+  font-family:'Montserrat', sans-serif;
   background:black;
-  color:gold;
+  color:#d4af37;
   text-align:center;
 }
 
+/* INTRO */
 #intro {
   position:fixed;
   width:100%;
@@ -16,27 +17,69 @@ body {
   align-items:center;
 }
 
-.intro-card {
-  background:rgba(0,0,0,0.6);
-  padding:30px;
+.intro-overlay {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8));
 }
 
-button {
-  padding:10px 20px;
+.intro-content {
+  position:relative;
+  z-index:2;
+}
+
+.buttons button {
+  margin:10px;
+}
+
+/* TEXTO */
+.lux {
+  font-family:'Playfair Display';
+  background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.big {
+  font-size:80px;
+}
+
+.subtitle {
+  letter-spacing:5px;
+}
+
+/* BOTONES */
+button, .btn {
+  padding:12px 25px;
   border:1px solid gold;
   background:transparent;
   color:gold;
+  cursor:pointer;
 }
 
+/* APP */
 #app {
   display:none;
+  animation:fadeIn 1.5s ease;
 }
 
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+/* HERO */
 .hero {
   height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
+}
+
+/* SECCIONES */
+.section {
+  padding:80px 20px;
 }
 
 /* SLIDER */
@@ -47,12 +90,14 @@ button {
 
 .track {
   display:flex;
-  gap:10px;
-  transition:0.5s;
+  gap:20px;
+  transition:transform 0.7s ease;
 }
 
 .track img {
-  width:200px;
-  height:300px;
+  width:260px;
+  height:360px;
   object-fit:cover;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.7);
 }
