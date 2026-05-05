@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Constanza - Mis 15</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
@@ -10,19 +11,18 @@
 
 <body>
 
-<!-- LOADER CINEMATOGRAFICO -->
+<!-- LOADER -->
 <div id="loader">
   <div class="loader-text">Cargando experiencia...</div>
 </div>
 
-<!-- SOBRE 3D -->
+<!-- SOBRE -->
 <div id="envelope">
   <div class="env">
-    <div class="env-front"></div>
     <div class="env-flap"></div>
     <div class="env-card">
-      <h1>Constanza</h1>
-      <p>Mis 15</p>
+      <h1 class="lux">Constanza</h1>
+      <p>Mis 15 años</p>
       <button onclick="openEnvelope()">Abrir</button>
     </div>
   </div>
@@ -30,12 +30,14 @@
 
 <!-- ELECCIÓN -->
 <div id="musicChoice">
-  <h2>Elegí tu experiencia</h2>
-  <button onclick="enter(true)">Con música</button>
-  <button onclick="enter(false)">Sin música</button>
+  <h2>¿Cómo querés vivir la experiencia?</h2>
+  <div class="btn-group">
+    <button onclick="enter(true)">Con música</button>
+    <button onclick="enter(false)">Sin música</button>
+  </div>
 </div>
 
-<!-- AUDIO REAL -->
+<!-- AUDIO -->
 <audio id="audio" loop>
   <source src="media/musica/musica15coti.mp3" type="audio/mpeg">
 </audio>
@@ -43,13 +45,15 @@
 <!-- CONTROL -->
 <div id="musicControl" onclick="toggleMusic()">🔊</div>
 
+<!-- FONDO -->
 <canvas id="bg"></canvas>
 
+<!-- APP -->
 <div id="app">
 
 <section class="section hero">
   <h1 class="lux">Constanza</h1>
-  <p>11 · 07 · 2026</p>
+  <p class="subtitle">11 · 07 · 2026</p>
 </section>
 
 <section class="section reveal">
@@ -64,7 +68,17 @@
 </section>
 
 <section class="section reveal">
-  <a class="btn" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
+  <h2>Dress Code</h2>
+  <p>Elegante Sport</p>
+</section>
+
+<section class="section reveal">
+  <h2>Regalos</h2>
+  <p>Tu presencia es lo más importante 💖</p>
+</section>
+
+<section class="section reveal">
+  <a class="btn main" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
 </section>
 
 </div>
