@@ -169,4 +169,16 @@ function draw(){
 
 setInterval(draw,30);
 
+window.copyAlias = function(){
+
+  const text = document.getElementById("alias-text").innerText;
+
+  navigator.clipboard.writeText(text).then(()=>{
+    alert("Alias copiado 💛");
+  }).catch(()=>{
+    alert("No se pudo copiar, intentá manualmente");
+  });
+
+}
+  
 });
