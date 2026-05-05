@@ -62,7 +62,7 @@ slider.addEventListener("touchmove", e=>{
   track.style.transform = `translateX(${walk}px)`;
 });
 
-// ✨ GLITTER PREMIUM
+// ✨ GLITTER PREMIUM MEJORADO
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
@@ -71,13 +71,13 @@ canvas.height = window.innerHeight;
 
 let particles=[];
 
-for(let i=0;i<60;i++){
+for(let i=0;i<120;i++){ // MÁS partículas
   particles.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
-    r:Math.random()*6,
-    s:Math.random()*0.3,
-    a:Math.random()*0.3
+    r:Math.random()*8+2,
+    s:Math.random()*0.6+0.2,
+    a:Math.random()*0.5+0.2
   });
 }
 
@@ -85,17 +85,24 @@ function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
   particles.forEach(p=>{
-    let g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
-    g.addColorStop(0,`rgba(212,175,55,${p.a})`);
+    let g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*5);
+    g.addColorStop(0,`rgba(255,215,0,${p.a})`);
     g.addColorStop(1,"transparent");
 
     ctx.fillStyle=g;
     ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r*4,0,Math.PI*2);
+    ctx.arc(p.x,p.y,p.r*5,0,Math.PI*2);
     ctx.fill();
 
     p.y += p.s;
-    if(p.y > canvas.height) p.y = 0;
+
+    // leve movimiento lateral
+    p.x += Math.sin(p.y * 0.01) * 0.3;
+
+    if(p.y > canvas.height){
+      p.y = 0;
+      p.x = Math.random()*canvas.width;
+    }
   });
 }
 
