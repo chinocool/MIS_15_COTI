@@ -158,8 +158,8 @@ body {
 
 /* SLIDER */
 .slider {
-  overflow:hidden;
-  width:90%;
+  width:100%;
+  max-width:900px;
 }
 
 .slides {
@@ -169,10 +169,10 @@ body {
 }
 
 .slides img {
-  width:260px;
-  height:360px;
-  object-fit:cover;
-  border-radius:12px;
+  width:280px;
+  height:380px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
 /* BOTONES */
