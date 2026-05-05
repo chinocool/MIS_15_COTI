@@ -1,8 +1,8 @@
 body {
   margin:0;
+  font-family:'Montserrat';
   background:black;
   color:#d4af37;
-  font-family:'Montserrat';
 }
 
 /* LOADER */
@@ -25,14 +25,14 @@ body {
 }
 
 .card {
-  width:300px;
-  height:450px;
+  width:320px;
+  height:500px;
   border-radius:20px;
   overflow:hidden;
   position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,0.9);
 }
 
+/* TAPA */
 .cover {
   position:absolute;
   width:100%;
@@ -47,33 +47,44 @@ body {
   transform:rotateX(180deg);
 }
 
-/* 🔥 IMAGEN BIEN AJUSTADA */
+/* IMAGEN BIEN AJUSTADA */
 .content {
   width:100%;
   height:100%;
-  background:
-    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)),
-    url("media/foto/coti_intro.jpeg") center center / cover no-repeat;
+  background:url("media/foto/coti_intro.jpeg") center center / cover no-repeat;
+  position:relative;
+}
 
+/* OVERLAY CORRECTO */
+.overlay {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+}
+
+/* TEXTO */
+.text {
+  position:absolute;
+  width:100%;
+  height:100%;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
-  padding:20px;
 }
 
-/* TEXTO */
-.lux {
+.text h1 {
   font-family:'Playfair Display';
-  font-size:40px;
-  background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  font-size:42px;
 }
 
-.big {
-  font-size:80px;
+button {
+  margin-top:20px;
+  padding:12px 30px;
+  border:1px solid gold;
+  background:transparent;
+  color:gold;
 }
 
 /* APP */
@@ -85,12 +96,12 @@ body {
 .hero {
   height:100vh;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
 }
 
-/* SLIDER (ARREGLADO) */
+/* SLIDER CORREGIDO */
 .slider {
   width:100%;
   overflow:hidden;
@@ -99,27 +110,13 @@ body {
 .track {
   display:flex;
   gap:20px;
-  width:max-content;
   padding:20px;
-  transition:transform 0.8s ease;
+  width:fit-content;
 }
 
 .track img {
-  width:260px;
-  height:360px;
+  width:280px;
+  height:380px;
   object-fit:cover;
   border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.6);
-}
-
-/* REVEAL */
-.reveal {
-  opacity:0;
-  transform:translateY(60px);
-}
-
-.reveal.active {
-  opacity:1;
-  transform:translateY(0);
-  transition:1s;
 }
