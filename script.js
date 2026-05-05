@@ -1,17 +1,23 @@
+const isMobile = window.innerWidth <= 768;
+
 let currentPage = 0;
 const pages = document.getElementById("pages");
 const sections = document.querySelectorAll(".page");
 const total = sections.length;
 
-// DOTS
 const dotsContainer = document.getElementById("dots");
 
-for(let i=0;i<total;i++){
-  let dot = document.createElement("span");
-  dotsContainer.appendChild(dot);
+// DOTS
+if(isMobile){
+  for(let i=0;i<total;i++){
+    let dot = document.createElement("span");
+    dotsContainer.appendChild(dot);
+  }
 }
 
 function updateUI(){
+  if(!isMobile) return;
+
   sections.forEach((s,i)=>{
     s.classList.toggle("active", i===currentPage);
   });
@@ -21,33 +27,30 @@ function updateUI(){
   });
 }
 
-// PARALLAX TRANSITION
-function goToPage(index){
-  currentPage = Math.max(0, Math.min(index, total-1));
+// MOBILE SWIPE
+if(isMobile){
 
-  pages.style.transform = `translateX(-${currentPage * 100}vw)`;
+  function goToPage(index){
+    currentPage = Math.max(0, Math.min(index, total-1));
+    pages.style.transform = `translateX(-${currentPage * 100}vw)`;
+    updateUI();
+  }
+
+  let startX = 0;
+
+  document.addEventListener("touchstart", e=>{
+    startX = e.touches[0].clientX;
+  });
+
+  document.addEventListener("touchend", e=>{
+    let diff = e.changedTouches[0].clientX - startX;
+
+    if(diff > 60) goToPage(currentPage - 1);
+    if(diff < -60) goToPage(currentPage + 1);
+  });
 
   updateUI();
 }
-
-updateUI();
-
-// SWIPE PRO
-let startX = 0;
-let endX = 0;
-
-document.addEventListener("touchstart", e=>{
-  startX = e.touches[0].clientX;
-});
-
-document.addEventListener("touchend", e=>{
-  endX = e.changedTouches[0].clientX;
-
-  let diff = endX - startX;
-
-  if(diff > 60) goToPage(currentPage - 1);
-  if(diff < -60) goToPage(currentPage + 1);
-});
 
 // ENTER
 function enter(withMusic){
@@ -76,19 +79,3 @@ setInterval(()=>{
 
   el.innerHTML = `${d} días · ${h} hs · ${m} min`;
 },1000);
-
-// 🎬 SLIDER NETFLIX EFFECT
-const track = document.getElementById("track");
-
-function updateSlider(){
-  const imgs = track.querySelectorAll("img");
-
-  imgs.forEach((img,i)=>{
-    img.classList.remove("active");
-  });
-
-  const center = Math.round(Math.abs(track.offsetLeft)/220);
-  if(imgs[center]) imgs[center].classList.add("active");
-}
-
-setInterval(updateSlider,200);
