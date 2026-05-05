@@ -3,19 +3,19 @@ body {
   font-family:'Montserrat';
   background:black;
   color:#d4af37;
-  text-align:center;
   overflow-x:hidden;
 }
 
-/* INTRO ZOOM SUAVE */
+/* INTRO */
 #intro {
   position:fixed;
   width:100%;
   height:100%;
-  overflow:hidden;
+  z-index:10;
   display:flex;
   justify-content:center;
   align-items:center;
+  overflow:hidden;
 }
 
 .intro-bg {
@@ -36,128 +36,77 @@ body {
   position:absolute;
   width:100%;
   height:100%;
-  background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85));
+  background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.9));
 }
 
 .intro-content {
   position:relative;
 }
 
-/* TEXTO DORADO ANIMADO */
+/* TEXTO */
 .lux {
   font-family:'Playfair Display';
-  background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37,#e6c200);
-  background-size:300%;
+  background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:shine 6s linear infinite;
 }
 
-@keyframes shine {
-  0%{background-position:0%}
-  100%{background-position:200%}
-}
+.big { font-size:60px; }
 
-.big { font-size:90px; }
-.subtitle { letter-spacing:6px; }
-
-/* ✨ BOTONES PREMIUM */
+/* BOTONES */
 button, .btn {
-  padding:12px 28px;
-  border:1px solid rgba(212,175,55,0.6);
+  padding:12px 25px;
+  border:1px solid gold;
   background:rgba(0,0,0,0.4);
   color:#d4af37;
   border-radius:30px;
   cursor:pointer;
-  backdrop-filter: blur(6px);
-  transition:all 0.3s ease;
+  transition:0.3s;
 }
 
-/* HOVER LUJO */
 button:hover, .btn:hover {
-  background:rgba(212,175,55,0.15);
-  box-shadow:0 0 15px rgba(212,175,55,0.5),
-             0 0 40px rgba(212,175,55,0.2);
-  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 0 15px rgba(212,175,55,0.5);
 }
 
 /* APP */
 #app {
   display:none;
+  position:relative;
+  z-index:5;
 }
 
 /* SECCIONES */
 .section {
   padding:100px 20px;
-  opacity:0;
-  transform:translateY(80px);
-}
-
-.section.visible {
-  opacity:1;
-  transform:translateY(0);
-  transition:1s;
+  text-align:center;
 }
 
 /* SLIDER */
 .slider {
   overflow:hidden;
-  touch-action: pan-y;
+  touch-action:pan-y;
 }
 
 .track {
   display:flex;
   gap:20px;
-  transition:transform 0.4s ease;
+  transition:transform 0.3s ease;
 }
 
 .track img {
-  width:280px;
-  height:380px;
-  border-radius:20px;
+  width:220px;
+  height:300px;
+  border-radius:16px;
   object-fit:cover;
-}
-
-/* 🎥 EFECTO NETFLIX  */
-.track img {
-  opacity:0.4;
-  transform:scale(0.85);
-  transition:all 0.4s ease;
-}
-
-.track img.active {
-  opacity:1;
-  transform:scale(1.1);
-  box-shadow:0 20px 60px rgba(0,0,0,0.9);
+  flex-shrink:0;
 }
 
 /* REGALOS */
-.gifts {
-  background:rgba(255,255,255,0.02);
-}
-
-.gift-box {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:10px;
-}
-
-.gift-box p {
-  max-width:250px;
-  font-size:14px;
-  opacity:0.8;
-}
-
 .gift-box img {
   width:60px;
-  height:auto;
-  object-fit:contain;
-  filter:brightness(1.2);
-  margin-bottom:10px;
 }
 
-/* FONDO GLITTER */
+/* CANVAS */
 canvas {
   position:fixed;
   top:0;
@@ -165,52 +114,5 @@ canvas {
   width:100%;
   height:100%;
   z-index:0;
-  pointer-events:none; /* 🔥 CLAVE */
-}
-
-/* 📱 MOBILE OPTIMIZADO */
-@media (max-width: 768px){
-
-  .big {
-    font-size: 48px;
-  }
-
-  .subtitle {
-    font-size: 14px;
-    letter-spacing: 3px;
-  }
-
-  .section {
-    padding:60px 20px;
-  }
-
-  /* SLIDER MOBILE */
-  .slider {
-    overflow:hidden;
-    width:100%;
-  }
-
-  .track {
-    gap:15px;
-    padding-left:20px;
-  }
-
-  .track img {
-    width:220px;
-    height:300px;
-    flex-shrink:0;
-    border-radius:16px;
-  }
-
-  /* BOTONES */
-  button, .btn {
-    padding:10px 18px;
-    font-size:14px;
-  }
-
-  /* REGALOS */
-  .gift-box img {
-    width:50px;
-  }
-
+  pointer-events:none;
 }
