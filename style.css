@@ -89,7 +89,7 @@ button, .btn {
 
 /* SLIDER */
 .slider {
-  /*overflow:hidden;*/
+  overflow:hidden;
   touch-action: pan-y;
 }
 
