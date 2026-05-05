@@ -1,8 +1,15 @@
 let musicOn = false;
 
+// LOADER
+window.onload = () => {
+  setTimeout(()=>{
+    document.getElementById("loader").style.display="none";
+  },2000);
+};
+
 // SOBRE
 function openEnvelope(){
-  document.getElementById("envelope").classList.add("open");
+  document.querySelector(".env").classList.add("open");
 
   setTimeout(()=>{
     document.getElementById("envelope").style.display="none";
@@ -16,24 +23,24 @@ function enter(withMusic){
   document.getElementById("musicChoice").style.display="none";
 
   if(musicOn){
-    document.getElementById("music").src += "&autoplay=1";
+    document.getElementById("audio").play();
   }
 }
 
-// CONTROL MÚSICA
+// CONTROL AUDIO
 function toggleMusic(){
-  const iframe = document.getElementById("music");
-  if(musicOn){
-    iframe.src = iframe.src.replace("&autoplay=1","");
-    musicOn = false;
+  const audio = document.getElementById("audio");
+
+  if(audio.paused){
+    audio.play();
   } else {
-    iframe.src += "&autoplay=1";
-    musicOn = true;
+    audio.pause();
   }
 }
 
 // COUNTDOWN
 const target = new Date("July 11, 2026 21:00:00").getTime();
+
 setInterval(()=>{
   const now = new Date().getTime();
   const diff = target-now;
@@ -42,7 +49,8 @@ setInterval(()=>{
   const h = Math.floor((diff/(1000*60*60))%24);
   const m = Math.floor((diff/(1000*60))%60);
 
-  document.getElementById("countdown").innerHTML = `${d} días · ${h} hs · ${m} min`;
+  document.getElementById("countdown").innerHTML =
+    `${d} días · ${h} hs · ${m} min`;
 },1000);
 
 // SCROLL
@@ -54,7 +62,7 @@ window.addEventListener("scroll", ()=>{
   });
 });
 
-// FONDO LUJO
+// FONDO PREMIUM
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
@@ -63,13 +71,13 @@ canvas.height = window.innerHeight;
 
 let particles=[];
 
-for(let i=0;i<120;i++){
+for(let i=0;i<150;i++){
   particles.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
     r:Math.random()*2,
     a:Math.random(),
-    s:Math.random()*0.5
+    s:Math.random()*0.7
   });
 }
 
