@@ -9,7 +9,7 @@ window.enter = function(withMusic){
   document.getElementById("intro").style.display="none";
   document.getElementById("app").style.display="block";
 
-  if(withMusic){
+  /*if(withMusic){
     const audio = document.getElementById("audio");
 
     audio.currentTime = 0;
@@ -26,6 +26,38 @@ window.enter = function(withMusic){
           console.log("⚠️ autoplay bloqueado", err);
         });
     }
+  }*/
+  if(withMusic){
+    setTimeout(()=>{
+      toggleMusic();
+    },300);
+  }
+}
+
+let isPlaying = false;
+window.toggleMusic = function(){
+  const audio = document.getElementById("audio");
+  const btn = document.getElementById("music-control");
+
+  if(!audio) return;
+
+  if(isPlaying){
+    audio.pause();
+    isPlaying = false;
+    btn.classList.add("off");
+    btn.innerHTML = "🔇";
+  } else {
+
+    audio.volume = 0.4;
+
+    audio.play().then(()=>{
+      isPlaying = true;
+      btn.classList.remove("off");
+      btn.innerHTML = "🔊";
+    }).catch(()=>{
+      alert("Tocá nuevamente para activar la música");
+    });
+
   }
 }
 
