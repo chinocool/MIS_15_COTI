@@ -78,7 +78,7 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 let p=[];
-for(let i=0;i<60;i++){
+for(let i=0;i<35;i++){
   p.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2,s:Math.random()*0.3});
 }
 
@@ -88,7 +88,7 @@ function draw(){
   p.forEach(e=>{
     ctx.beginPath();
     ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
-    ctx.fillStyle="rgba(212,175,55,0.5)";
+    ctx.fillStyle="rgba(212,175,55,0.25)";
     ctx.fill();
 
     e.y+=e.s;
