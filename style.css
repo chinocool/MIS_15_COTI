@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: black;
+  color: gold;
+  text-align: center;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 60px;
+  letter-spacing: 5px;
+}
+
+h2 {
+  margin-top: 40px;
+}
+
+a {
+  color: gold;
+  text-decoration: none;
+  border: 1px solid gold;
+  padding: 10px 20px;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+a:hover {
+  background: gold;
+  color: black;
+}
+
+section {
+  padding: 40px 20px;
+}
