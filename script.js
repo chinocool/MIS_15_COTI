@@ -33,7 +33,38 @@ setInterval(()=>{
   const m = Math.floor((diff/(1000*60))%60);
   const s = Math.floor((diff / 1000) % 60);
 
-  el.innerHTML = `${d} días · ${h} hs · ${m} min · ${s} seg <br>días hs min seg`;
+  //el.innerHTML = `${d} días · ${h} hs · ${m} min · ${s} seg <br>días hs min seg`;
+  el.innerHTML = `
+  <div class="countdown">
+
+    <div class="cd-item">
+      <span class="cd-value">${d}</span>
+      <span class="cd-label">Días</span>
+    </div>
+
+    <div class="cd-sep"></div>
+
+    <div class="cd-item">
+      <span class="cd-value">${h}</span>
+      <span class="cd-label">Hs</span>
+    </div>
+
+    <div class="cd-sep"></div>
+
+    <div class="cd-item">
+      <span class="cd-value">${m}</span>
+      <span class="cd-label">Min</span>
+    </div>
+
+    <div class="cd-sep"></div>
+
+    <div class="cd-item">
+      <span class="cd-value">${s}</span>
+      <span class="cd-label">Seg</span>
+    </div>
+
+  </div>
+`;
 },1000);
 
 //////////////////////////////////////////////////
