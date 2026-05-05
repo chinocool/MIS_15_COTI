@@ -204,17 +204,18 @@ button:hover, .btn:hover {
   display:flex;
   gap:20px;
   transition:transform .3s ease;
-
   max-width:100%;
   will-change:transform;
+/*agregadooo*/
+  justify-content:center; /* 👈 clave */
+  align-items:center;
 }
 
-.track img {
+/*.track img {
   width:clamp(160px, 60vw, 220px);
   height:auto;
   border-radius:16px;
   object-fit:cover;
-
   opacity:.4;
   transform:scale(.9);
   transition:.4s;
@@ -224,6 +225,28 @@ button:hover, .btn:hover {
   opacity:1;
   transform:scale(1.05);
   box-shadow:0 20px 60px rgba(0,0,0,0.9);
+}*/
+
+.track img {
+  width:clamp(180px, 55vw, 260px);
+  height:auto;
+  border-radius:16px;
+  object-fit:cover;
+  opacity:1; /* 👈 sin opacidad */
+  transform:scale(0.85);
+  transition:all 0.4s ease;
+}
+
+.track img.active {
+  transform:scale(1.2);
+  z-index:2;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.9),
+    0 0 25px rgba(212,175,55,0.4);
+}
+
+.track img:not(.active) {
+  transform:scale(0.85);
 }
 
 /* =========================
