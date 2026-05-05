@@ -95,7 +95,7 @@ h1.lux, h2.lux {
 }
 
 h1.lux {
-  font-size:100px;
+  font-size:90px;
 }
 
 h2.lux {
@@ -104,11 +104,11 @@ h2.lux {
 
 @media (max-width:768px){
   h1.lux {
-    font-size:48px;
+    font-size:68px;
   }
 
   h2.lux {
-    font-size:28px;
+    font-size:48px;
   }
 }
 
