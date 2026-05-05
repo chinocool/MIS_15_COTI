@@ -5,25 +5,28 @@
 <title>Constanza - Mis 15</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- INTRO LUJO -->
+<!-- INTRO EXPERIENCIA -->
 <div id="intro">
-  <div class="intro-inner">
-    <h1 class="lux-title">Constanza</h1>
-    <p class="lux-sub">Mis 15 años</p>
-    <button onclick="startExperience()">Abrir Invitación</button>
+  <div class="intro-box">
+    <h1 class="lux">Constanza</h1>
+    <p>Mis 15 años</p>
+
+    <div class="buttons">
+      <button onclick="enter(true)">Entrar con música</button>
+      <button onclick="enter(false)">Entrar sin música</button>
+    </div>
   </div>
 </div>
 
 <!-- FONDO -->
-<canvas id="particles"></canvas>
+<canvas id="bg"></canvas>
 
-<!-- APP -->
+<!-- CONTENIDO -->
 <div id="app">
 
 <section class="section hero">
@@ -33,7 +36,7 @@
 
 <section class="section reveal">
   <h2>Faltan</h2>
-  <div id="countdown" class="count"></div>
+  <div id="countdown"></div>
 </section>
 
 <section class="section reveal">
@@ -53,16 +56,16 @@
 </section>
 
 <section class="section reveal">
-  <a class="btn main-btn" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
+  <a class="btn main" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
 </section>
 
 </div>
 
+<!-- MÚSICA -->
 <iframe id="music"
 src="https://www.youtube.com/embed/h5jz8xdpR0M?enablejsapi=1&loop=1&playlist=h5jz8xdpR0M"
 frameborder="0"></iframe>
 
 <script src="script.js"></script>
-
 </body>
 </html>
