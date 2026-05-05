@@ -87,6 +87,31 @@ body {
     0 0 20px rgba(212,175,55,0.1);
 }
 
+/* ✨ TITULOS CURSIVOS PREMIUM */
+h1.lux, h2.lux {
+  font-family: 'Great Vibes', cursive;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+h1.lux {
+  font-size:70px;
+}
+
+h2.lux {
+  font-size:36px;
+}
+
+@media (max-width:768px){
+  h1.lux {
+    font-size:48px;
+  }
+
+  h2.lux {
+    font-size:28px;
+  }
+}
+
 @keyframes shineGold {
   0% { background-position:0% }
   100% { background-position:200% }
