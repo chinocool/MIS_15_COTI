@@ -1,158 +1,128 @@
-// ESPERAR A QUE TODO EL DOM CARGUE
 document.addEventListener("DOMContentLoaded", () => {
 
-  let musicOn = false;
-  const audio = document.getElementById("audio");
+let musicOn = false;
+const audio = document.getElementById("audio");
 
-  // BLOQUEAR SCROLL INICIAL
-  document.body.classList.add("no-scroll");
+document.body.classList.add("no-scroll");
 
-  // LOADER (SIEMPRE SE LIBERA)
-  setTimeout(() => {
-    const loader = document.getElementById("loader");
-    if(loader){
-      loader.style.opacity = "0";
-      setTimeout(() => loader.style.display = "none", 500);
-    }
-  }, 1200);
+setTimeout(()=>{
+  document.getElementById("loader").style.display="none";
+},1200);
 
-  // ===== FUNCIONES =====
+window.openEnvelope = function(){
+  document.querySelector(".env").classList.add("open");
 
-  window.openEnvelope = function(){
-    const env = document.querySelector(".env");
-    const envelope = document.getElementById("envelope");
-    const musicChoice = document.getElementById("musicChoice");
+  setTimeout(()=>{
+    document.getElementById("envelope").style.display="none";
+    document.getElementById("musicChoice").style.display="flex";
+  },900);
+}
 
-    if(env) env.classList.add("open");
+window.enter = function(withMusic){
+  musicOn = withMusic;
 
-    setTimeout(()=>{
-      if(envelope) envelope.style.display = "none";
-      if(musicChoice) musicChoice.style.display = "flex";
-    }, 900);
+  document.getElementById("musicChoice").style.display="none";
+  document.getElementById("app").classList.add("active");
+  document.body.classList.remove("no-scroll");
+
+  if(musicOn){
+    audio.volume = 0;
+    audio.play();
+    let v=0;
+    let i=setInterval(()=>{
+      if(v<0.3){ v+=0.02; audio.volume=v; }
+      else clearInterval(i);
+    },100);
   }
 
-  window.enter = function(withMusic){
-    musicOn = withMusic;
+  reveal();
+}
 
-    const musicChoice = document.getElementById("musicChoice");
-    const app = document.getElementById("app");
+window.toggleMusic = function(){
+  if(audio.paused) audio.play();
+  else audio.pause();
+}
 
-    if(musicChoice) musicChoice.style.display = "none";
+// COUNTDOWN
+const target = new Date("July 11, 2026 21:00:00").getTime();
 
-    // MOSTRAR CONTENIDO SIEMPRE
-    if(app){
-      app.style.display = "block";
-      app.classList.add("active");
+setInterval(()=>{
+  const now = new Date().getTime();
+  const diff = target-now;
+
+  const d = Math.floor(diff/(1000*60*60*24));
+  const h = Math.floor((diff/(1000*60*60))%24);
+  const m = Math.floor((diff/(1000*60))%60);
+
+  document.getElementById("countdown").innerHTML =
+    `${d} días · ${h} hs · ${m} min`;
+},1000);
+
+// SCROLL
+function reveal(){
+  document.querySelectorAll(".reveal").forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight-100){
+      el.classList.add("active");
     }
+  });
+}
+window.addEventListener("scroll", reveal);
 
-    // LIBERAR SCROLL SIEMPRE
-    document.body.classList.remove("no-scroll");
+// SLIDER
+let slideIndex = 0;
+setInterval(()=>{
+  const slides = document.getElementById("slides");
+  if(!slides) return;
 
-    // MÚSICA SEGURA
-    if(musicOn && audio){
-      audio.volume = 0;
-      audio.play().then(()=>{
-        fadeInAudio();
-      }).catch(()=>{
-        console.log("Autoplay bloqueado por el navegador");
-      });
+  slideIndex++;
+  slides.style.transform = `translateX(-${slideIndex*270}px)`;
+
+  if(slideIndex > slides.children.length-2){
+    slideIndex = 0;
+  }
+},3000);
+
+// FONDO FESTIVO
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let balls=[];
+
+for(let i=0;i<40;i++){
+  balls.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*20+10,
+    speed:Math.random()*0.3,
+    alpha:Math.random()*0.5+0.3
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  balls.forEach(b=>{
+    let g = ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);
+    g.addColorStop(0,`rgba(255,215,0,${b.alpha})`);
+    g.addColorStop(1,"transparent");
+
+    ctx.fillStyle=g;
+    ctx.beginPath();
+    ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+    ctx.fill();
+
+    b.y += b.speed;
+
+    if(b.y > canvas.height){
+      b.y = 0;
+      b.x = Math.random()*canvas.width;
     }
+  });
+}
 
-    // FORZAR ANIMACIONES
-    setTimeout(reveal, 100);
-  }
-
-  function fadeInAudio(){
-    let vol = 0;
-    const interval = setInterval(()=>{
-      if(vol < 0.3){
-        vol += 0.02;
-        audio.volume = vol;
-      } else {
-        clearInterval(interval);
-      }
-    }, 100);
-  }
-
-  window.toggleMusic = function(){
-    if(!audio) return;
-
-    if(audio.paused){
-      audio.play();
-    } else {
-      audio.pause();
-    }
-  }
-
-  // COUNTDOWN
-  const target = new Date("July 11, 2026 21:00:00").getTime();
-
-  setInterval(()=>{
-    const el = document.getElementById("countdown");
-    if(!el) return;
-
-    const now = new Date().getTime();
-    const diff = target - now;
-
-    const d = Math.floor(diff/(1000*60*60*24));
-    const h = Math.floor((diff/(1000*60*60))%24);
-    const m = Math.floor((diff/(1000*60))%60);
-
-    el.innerHTML = `${d} días · ${h} hs · ${m} min`;
-  },1000);
-
-  // REVEAL SCROLL
-  function reveal(){
-    document.querySelectorAll(".reveal").forEach(el=>{
-      const top = el.getBoundingClientRect().top;
-      if(top < window.innerHeight - 100){
-        el.classList.add("active");
-      }
-    });
-  }
-
-  window.addEventListener("scroll", reveal);
-  window.addEventListener("load", reveal);
-
-  // FONDO (SEGURIDAD)
-  const canvas = document.getElementById("bg");
-  if(canvas){
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let particles = [];
-
-    for(let i=0;i<80;i++){
-      particles.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        r:Math.random()*2,
-        a:Math.random(),
-        s:Math.random()*0.4
-      });
-    }
-
-    function draw(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-
-      particles.forEach(p=>{
-        let g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*5);
-        g.addColorStop(0,`rgba(212,175,55,${p.a})`);
-        g.addColorStop(1,"transparent");
-
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r*5,0,Math.PI*2);
-        ctx.fill();
-
-        p.y += p.s;
-        if(p.y > canvas.height) p.y = 0;
-      });
-    }
-
-    setInterval(draw, 30);
-  }
+setInterval(draw,30);
 
 });
