@@ -195,4 +195,39 @@ if(canvas){
   setInterval(draw,30);
 }
 
+setInterval(draw,30);
+}
+
+//////////////////////////////////////////////////
+// 🎥 SLIDER CENTRO TIPO NETFLIX (AGREGAR AQUÍ)
+//////////////////////////////////////////////////
+
+function updateSliderCenter(){
+
+  const slider = document.getElementById("slider");
+  const track = document.getElementById("track");
+
+  if(!slider || !track) return;
+
+  const imgs = track.querySelectorAll("img");
+  const sliderRect = slider.getBoundingClientRect();
+
+  imgs.forEach(img=>{
+    const rect = img.getBoundingClientRect();
+    const center = rect.left + rect.width/2;
+
+    if(center > sliderRect.left + sliderRect.width*0.3 &&
+       center < sliderRect.left + sliderRect.width*0.7){
+      img.classList.add("active");
+    } else {
+      img.classList.remove("active");
+    }
+  });
+}
+
+// corre constantemente pero liviano
+setInterval(updateSliderCenter, 150);
+
+});
+
 });
