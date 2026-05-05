@@ -208,6 +208,59 @@ canvas {
 }
 
 /* =========================
+   MAPA PREMIUM
+========================= */
+
+.map-card {
+  width:100%;
+  max-width:520px;
+  margin:30px auto 0;
+
+  background:rgba(255,255,255,0.03);
+  backdrop-filter:blur(6px);
+
+  border-radius:20px;
+  padding:15px;
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.7),
+    inset 0 0 20px rgba(212,175,55,0.05);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+}
+
+/* MAPA */
+.map-container {
+  width:100%;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+}
+
+.map-container iframe {
+  width:100%;
+  height:300px;
+  border:0;
+  filter:grayscale(0.2) contrast(1.05);
+}
+
+/* BOTÓN */
+.map-btn {
+  width:100%;
+  text-align:center;
+}
+
+/* MOBILE */
+@media (max-width:768px){
+  .map-container iframe {
+    height:250px;
+  }
+}
+
+/* =========================
    MOBILE
 ========================= */
 @media (max-width:768px){
