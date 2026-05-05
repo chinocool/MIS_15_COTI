@@ -1,52 +1,61 @@
 body {
   margin:0;
-  font-family:'Montserrat', sans-serif;
+  font-family:'Montserrat';
   background:black;
   color:#d4af37;
   text-align:center;
+  overflow-x:hidden;
 }
 
 /* INTRO */
 #intro {
   position:fixed;
   width:100%;
-  height:150%;
-  background:url("media/foto/coti_intro.jpeg") center no-repeat;
+  height:100%;
+  background:url("media/foto/coti_intro.jpeg") center/cover no-repeat;
   display:flex;
   justify-content:center;
   align-items:center;
+  animation:fadeIntro 1.5s ease;
+}
+
+@keyframes fadeIntro {
+  from {opacity:0; transform:scale(1.05);}
+  to {opacity:1; transform:scale(1);}
 }
 
 .intro-overlay {
   position:absolute;
   width:100%;
   height:100%;
-  background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8));
+  background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.85));
 }
 
 .intro-content {
   position:relative;
-  z-index:2;
-}
-
-.buttons button {
-  margin:10px;
 }
 
 /* TEXTO */
 .lux {
   font-family:'Playfair Display';
   background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37);
+  background-size:200%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  animation:shine 6s linear infinite;
+}
+
+@keyframes shine {
+  0%{background-position:200%}
+  100%{background-position:-200%}
 }
 
 .big {
-  font-size:80px;
+  font-size:90px;
 }
 
 .subtitle {
-  letter-spacing:5px;
+  letter-spacing:6px;
 }
 
 /* BOTONES */
@@ -56,15 +65,21 @@ button, .btn {
   background:transparent;
   color:gold;
   cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover, .btn:hover {
+  background:gold;
+  color:black;
 }
 
 /* APP */
 #app {
   display:none;
-  animation:fadeIn 1.5s ease;
+  animation:fadeApp 1.5s ease;
 }
 
-@keyframes fadeIn {
+@keyframes fadeApp {
   from {opacity:0;}
   to {opacity:1;}
 }
@@ -79,25 +94,49 @@ button, .btn {
 
 /* SECCIONES */
 .section {
-  padding:80px 20px;
+  padding:100px 20px;
+  opacity:0;
+  transform:translateY(80px);
+}
+
+.section.visible {
+  opacity:1;
+  transform:translateY(0);
+  transition:1.2s ease;
 }
 
 /* SLIDER */
 .slider {
   overflow:hidden;
-  width:100%;
 }
 
 .track {
   display:flex;
-  gap:20px;
-  transition:transform 0.7s ease;
+  gap:30px;
+  transition:transform 1s ease;
 }
 
 .track img {
-  width:260px;
-  height:360px;
+  width:280px;
+  height:380px;
+  border-radius:20px;
   object-fit:cover;
-  border-radius:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.7);
+  box-shadow:0 20px 60px rgba(0,0,0,0.9);
+}
+
+/* REGALOS */
+.gifts {
+  background:rgba(255,255,255,0.02);
+}
+
+.gift-box {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+}
+
+.gift-box img {
+  width:140px;
+  filter:brightness(1.2);
 }
