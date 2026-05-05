@@ -11,24 +11,23 @@
 
 <body>
 
-<!-- LOADER -->
 <div id="loader">
   <div class="loader-text">Cargando experiencia...</div>
 </div>
 
-<!-- SOBRE -->
 <div id="envelope">
   <div class="env">
     <div class="env-flap"></div>
+
     <div class="env-card">
       <h1 class="lux">Constanza</h1>
       <p>Mis 15 años</p>
       <button onclick="openEnvelope()">Abrir</button>
     </div>
+
   </div>
 </div>
 
-<!-- ELECCIÓN -->
 <div id="musicChoice">
   <h2>¿Cómo querés vivir la experiencia?</h2>
   <div class="btn-group">
@@ -37,18 +36,14 @@
   </div>
 </div>
 
-<!-- AUDIO -->
 <audio id="audio" loop>
   <source src="media/musica/musica15coti.mp3" type="audio/mpeg">
 </audio>
 
-<!-- CONTROL -->
 <div id="musicControl" onclick="toggleMusic()">🔊</div>
 
-<!-- FONDO -->
 <canvas id="bg"></canvas>
 
-<!-- APP -->
 <div id="app">
 
 <section class="section hero">
@@ -78,7 +73,19 @@
 </section>
 
 <section class="section reveal">
-  <a class="btn main" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
+  <h2>Momentos</h2>
+
+  <div class="slider">
+    <div class="slides" id="slides">
+      <img src="media/foto/foto1.jpg">
+      <img src="media/foto/foto2.jpg">
+      <img src="media/foto/foto3.jpg">
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <a class="btn" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
 </section>
 
 </div>
