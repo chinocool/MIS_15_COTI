@@ -98,6 +98,14 @@ h1.lux, h2.lux {
   letter-spacing:1px;
 }
 
+/* ✨ SOMBRA ELEGANTE EN TITULOS */
+h1.lux, h2.lux {
+  text-shadow:
+    0 2px 6px rgba(0,0,0,0.8),        /* profundidad */
+    0 0 10px rgba(212,175,55,0.25),   /* brillo dorado */
+    0 0 20px rgba(212,175,55,0.15);
+}
+
 h1.lux {
   font-size:80px;
 }
