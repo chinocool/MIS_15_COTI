@@ -1,44 +1,50 @@
-// INICIO EXPERIENCIA
-function startExperience() {
+let musicEnabled = false;
+
+// ENTRAR
+function enter(withMusic){
+  musicEnabled = withMusic;
+
   document.getElementById("intro").style.opacity = "0";
 
   setTimeout(() => {
     document.getElementById("intro").style.display = "none";
-    document.getElementById("music").src += "&autoplay=1";
+
+    if(musicEnabled){
+      document.getElementById("music").src += "&autoplay=1";
+    }
+
   }, 800);
 }
 
-// COUNTDOWN DINÁMICO
+// COUNTDOWN
 const target = new Date("July 11, 2026 21:00:00").getTime();
-const el = document.getElementById("countdown");
+const cd = document.getElementById("countdown");
 
-setInterval(() => {
+setInterval(()=>{
   const now = new Date().getTime();
   const diff = target - now;
 
-  const d = Math.floor(diff / (1000*60*60*24));
+  const d = Math.floor(diff/(1000*60*60*24));
   const h = Math.floor((diff/(1000*60*60))%24);
   const m = Math.floor((diff/(1000*60))%60);
 
-  el.innerHTML = `${d} días · ${h} hs · ${m} min`;
-}, 1000);
+  cd.innerHTML = `${d} días · ${h} hs · ${m} min`;
+},1000);
 
-// SCROLL REVEAL PRO
-const reveals = document.querySelectorAll(".reveal");
+// SCROLL REVEAL
+const items = document.querySelectorAll('.reveal');
 
-function revealOnScroll() {
-  reveals.forEach(el => {
+window.addEventListener('scroll', ()=>{
+  items.forEach(el=>{
     const top = el.getBoundingClientRect().top;
-    if(top < window.innerHeight - 120){
-      el.classList.add("active");
+    if(top < window.innerHeight - 100){
+      el.classList.add('active');
     }
   });
-}
+});
 
-window.addEventListener("scroll", revealOnScroll);
-
-// PARTICULAS PROFUNDIDAD
-const canvas = document.getElementById("particles");
+// PARTICULAS PREMIUM
+const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
@@ -46,17 +52,17 @@ canvas.height = window.innerHeight;
 
 let particles = [];
 
-for(let i=0;i<120;i++){
+for(let i=0;i<150;i++){
   particles.push({
     x: Math.random()*canvas.width,
     y: Math.random()*canvas.height,
     size: Math.random()*2,
-    speed: Math.random()*0.7,
+    speed: Math.random()*1,
     alpha: Math.random()
   });
 }
 
-function drawParticles(){
+function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
   particles.forEach(p=>{
@@ -74,4 +80,4 @@ function drawParticles(){
   });
 }
 
-setInterval(drawParticles, 30);
+setInterval(draw, 30);
