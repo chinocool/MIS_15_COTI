@@ -1,3 +1,9 @@
+html {
+  visibility:hidden;
+}
+html.fonts-loaded {
+  visibility:visible;
+}
 /* =========================
    BASE
 ========================= */
