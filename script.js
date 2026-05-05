@@ -1,9 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 🎬 carga premium
   window.addEventListener("load", () => {
-    document.documentElement.classList.add("loaded");
+    document.body.classList.add("loaded");
   });
-
+  
+  // fallback por si load no dispara rápido
+  setTimeout(() => {
+    document.body.classList.add("loaded");
+  }, 1200);
+  
 //////////////////////////////////////////////////
 // ENTER
 //////////////////////////////////////////////////
