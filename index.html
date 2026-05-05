@@ -2,58 +2,65 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Mis 15 - Constanza</title>
+<title>Constanza - Mis 15</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
 
-<!-- PANTALLA DE ENTRADA -->
+<!-- INTRO -->
 <div id="intro">
-  <div class="intro-box">
+  <div class="intro-content">
     <h1>Constanza</h1>
     <p>Mis 15 años</p>
-    <button onclick="entrar()">Abrir Invitación</button>
+    <button onclick="start()">Ver Invitación</button>
   </div>
 </div>
 
-<!-- PARTÍCULAS -->
-<canvas id="particles"></canvas>
+<!-- PARTICLES -->
+<canvas id="bg"></canvas>
 
 <!-- CONTENIDO -->
-<div id="contenido">
+<div id="app">
 
-  <section class="hero fade">
-    <h1>Constanza</h1>
-    <p>11 de Julio 2026</p>
-  </section>
+<section class="block hero">
+  <h1 class="title">Constanza</h1>
+  <p class="subtitle">11 de Julio 2026</p>
+</section>
 
-  <section class="fade">
-    <h2>Faltan</h2>
-    <div id="contador"></div>
-  </section>
+<section class="block fade">
+  <h2>Faltan</h2>
+  <div id="countdown"></div>
+</section>
 
-  <section class="fade">
-    <p>📍 Salón A.E.F.I.P.</p>
-    <a href="https://maps.app.goo.gl/2fHLRixuznUjLptz8" target="_blank">Ver ubicación</a>
-  </section>
+<section class="block fade">
+  <h2>¿Dónde?</h2>
+  <p>Salón A.E.F.I.P.</p>
+  <a href="https://maps.app.goo.gl/2fHLRixuznUjLptz8" target="_blank">VER UBICACIÓN</a>
+</section>
 
-  <section class="fade">
-    <h2>🎁 Regalos</h2>
-    <p>Tu presencia es lo más importante 💖</p>
-  </section>
+<section class="block fade">
+  <h2>Dress Code</h2>
+  <p>Elegante Sport</p>
+</section>
 
-  <section class="fade">
-    <a class="btn" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
-  </section>
+<section class="block fade">
+  <h2>Regalos</h2>
+  <p>Tu presencia es mi mejor regalo 💖</p>
+</section>
+
+<section class="block fade">
+  <a class="btn" href="https://wa.me/549XXXXXXXXXX">CONFIRMAR ASISTENCIA</a>
+</section>
 
 </div>
 
 <!-- MÚSICA -->
 <iframe id="music"
-src="https://www.youtube.com/embed/h5jz8xdpR0M?autoplay=0&loop=1&playlist=h5jz8xdpR0M"
+src="https://www.youtube.com/embed/h5jz8xdpR0M?enablejsapi=1&loop=1&playlist=h5jz8xdpR0M"
 frameborder="0"></iframe>
 
 <script src="script.js"></script>
