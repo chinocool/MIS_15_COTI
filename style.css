@@ -2,11 +2,9 @@ body {
   margin:0;
   background:black;
   color:#d4af37;
-  font-family:'Montserrat', sans-serif;
+  font-family:'Montserrat';
   overflow-x:hidden;
 }
-
-body.no-scroll { overflow:hidden; }
 
 /* LOADER */
 #loader {
@@ -18,18 +16,20 @@ body.no-scroll { overflow:hidden; }
   justify-content:center;
   align-items:center;
   z-index:300;
-  transition: opacity 1s;
+  transition:1s;
 }
 
-.loader-text {
-  font-size:22px;
-  animation:pulse 2s infinite;
+.loader-line {
+  width:100px;
+  height:2px;
+  background:gold;
+  animation:load 2s infinite;
 }
 
-@keyframes pulse {
-  0%{opacity:0.3}
-  50%{opacity:1}
-  100%{opacity:0.3}
+@keyframes load {
+  0%{transform:scaleX(0)}
+  50%{transform:scaleX(1)}
+  100%{transform:scaleX(0)}
 }
 
 /* SOBRE */
@@ -40,22 +40,24 @@ body.no-scroll { overflow:hidden; }
   display:flex;
   justify-content:center;
   align-items:center;
-  z-index:200;
-  background:black;
+  perspective:1200px;
 }
 
 .env {
-  width:280px;
-  height:180px;
+  width:300px;
+  height:420px;
   position:relative;
+  transform-style:preserve-3d;
 }
 
 .env-flap {
+  position:absolute;
   width:100%;
-  height:100%;
+  height:50%;
   background:#111;
   transform-origin:top;
-  transition:1s;
+  transition:1.2s cubic-bezier(.22,1,.36,1);
+  z-index:3;
 }
 
 .open .env-flap {
@@ -66,127 +68,72 @@ body.no-scroll { overflow:hidden; }
   position:absolute;
   width:100%;
   height:100%;
-  background:url("media/foto/coti_intro.jpeg") center/cover no-repeat;
+  background:
+    linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.8)),
+    url("media/foto/coti_intro.jpeg") center/cover no-repeat;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
 }
 
-.env-card::before {
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.5);
-}
-
-.env-card h1,
-.env-card p,
-.env-card button {
-  position:relative;
-  z-index:2;
-}
-
-/* MUSIC */
-#musicChoice {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:150;
-}
-
-button, .btn {
-  padding:12px 25px;
-  border:1px solid #d4af37;
-  background:transparent;
-  color:#d4af37;
-  cursor:pointer;
-}
-
-button:hover, .btn:hover {
-  background:#d4af37;
-  color:black;
-}
-
 /* TEXTO */
 .lux {
   font-family:'Playfair Display';
-  font-size:70px;
   background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37);
-  background-size:200%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:shine 5s linear infinite;
+  animation:shine 5s infinite linear;
 }
+
+.big { font-size:80px; }
 
 @keyframes shine {
   0%{background-position:200%}
   100%{background-position:-200%}
 }
 
-/* APP */
-#app { display:none; }
-#app.active { display:block; }
-
-.section {
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
 /* REVEAL */
 .reveal {
   opacity:0;
   transform:translateY(60px);
+  transition:1.2s cubic-bezier(.22,1,.36,1);
 }
 
 .reveal.active {
   opacity:1;
   transform:translateY(0);
-  transition:1.2s ease;
 }
 
 /* SLIDER */
 .slider {
-  width:90%;
   overflow:hidden;
+  width:90%;
 }
 
 .slides {
   display:flex;
   gap:20px;
-  transition:transform 0.5s;
+  transition: transform 0.8s cubic-bezier(.22,1,.36,1);
 }
 
 .slides img {
-  width:250px;
-  height:350px;
+  width:260px;
+  height:360px;
   object-fit:cover;
-  border-radius:10px;
+  border-radius:12px;
 }
 
-/* CONTROL */
-#musicControl {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  cursor:pointer;
-  z-index:50;
+/* BOTONES */
+.btn {
+  border:1px solid gold;
+  padding:12px 25px;
+  color:gold;
+  text-decoration:none;
 }
 
 /* CANVAS */
 canvas {
   position:fixed;
-  top:0;
-  left:0;
   z-index:-1;
 }
