@@ -61,12 +61,24 @@ body {
 .big { font-size:90px; }
 .subtitle { letter-spacing:6px; }
 
-/* BOTONES */
+/* ✨ BOTONES PREMIUM */
 button, .btn {
-  padding:12px 25px;
-  border:1px solid gold;
-  background:transparent;
-  color:gold;
+  padding:12px 28px;
+  border:1px solid rgba(212,175,55,0.6);
+  background:rgba(0,0,0,0.4);
+  color:#d4af37;
+  border-radius:30px;
+  cursor:pointer;
+  backdrop-filter: blur(6px);
+  transition:all 0.3s ease;
+}
+
+/* HOVER LUJO */
+button:hover, .btn:hover {
+  background:rgba(212,175,55,0.15);
+  box-shadow:0 0 15px rgba(212,175,55,0.5),
+             0 0 40px rgba(212,175,55,0.2);
+  transform:translateY(-2px) scale(1.03);
 }
 
 /* APP */
@@ -104,6 +116,19 @@ button, .btn {
   height:380px;
   border-radius:20px;
   object-fit:cover;
+}
+
+/* 🎥 EFECTO NETFLIX  */
+.track img {
+  opacity:0.4;
+  transform:scale(0.85);
+  transition:all 0.4s ease;
+}
+
+.track img.active {
+  opacity:1;
+  transform:scale(1.1);
+  box-shadow:0 20px 60px rgba(0,0,0,0.9);
 }
 
 /* REGALOS */
