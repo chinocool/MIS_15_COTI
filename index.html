@@ -10,28 +10,35 @@
 
 <body>
 
-<!-- INTRO EXPERIENCIA -->
-<div id="intro">
-  <div class="intro-box">
-    <h1 class="lux">Constanza</h1>
+<!-- SOBRE -->
+<div id="envelope">
+  <div class="flap"></div>
+  <div class="card">
+    <h1>Constanza</h1>
     <p>Mis 15 años</p>
-
-    <div class="buttons">
-      <button onclick="enter(true)">Entrar con música</button>
-      <button onclick="enter(false)">Entrar sin música</button>
-    </div>
+    <button onclick="openEnvelope()">Abrir</button>
   </div>
+</div>
+
+<!-- ELECCIÓN MÚSICA -->
+<div id="musicChoice">
+  <h2>¿Cómo querés vivir la experiencia?</h2>
+  <button onclick="enter(true)">Con música</button>
+  <button onclick="enter(false)">Sin música</button>
 </div>
 
 <!-- FONDO -->
 <canvas id="bg"></canvas>
 
+<!-- CONTROL MÚSICA -->
+<div id="musicControl" onclick="toggleMusic()">🔊</div>
+
 <!-- CONTENIDO -->
 <div id="app">
 
 <section class="section hero">
-  <h1 class="title">Constanza</h1>
-  <p class="subtitle">11 · 07 · 2026</p>
+  <h1 class="lux">Constanza</h1>
+  <p>11 · 07 · 2026</p>
 </section>
 
 <section class="section reveal">
@@ -42,7 +49,7 @@
 <section class="section reveal">
   <h2>Lugar</h2>
   <p>Salón A.E.F.I.P.</p>
-  <a class="btn glow" href="https://maps.app.goo.gl/2fHLRixuznUjLptz8" target="_blank">Ver ubicación</a>
+  <a class="btn" href="https://maps.app.goo.gl/2fHLRixuznUjLptz8" target="_blank">Ver ubicación</a>
 </section>
 
 <section class="section reveal">
@@ -61,7 +68,6 @@
 
 </div>
 
-<!-- MÚSICA -->
 <iframe id="music"
 src="https://www.youtube.com/embed/h5jz8xdpR0M?enablejsapi=1&loop=1&playlist=h5jz8xdpR0M"
 frameborder="0"></iframe>
