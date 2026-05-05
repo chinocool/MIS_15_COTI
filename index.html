@@ -4,61 +4,60 @@
 <meta charset="UTF-8">
 <title>Constanza - Mis 15</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- INTRO -->
+<!-- INTRO LUJO -->
 <div id="intro">
-  <div class="intro-content">
-    <h1>Constanza</h1>
-    <p>Mis 15 años</p>
-    <button onclick="start()">Ver Invitación</button>
+  <div class="intro-inner">
+    <h1 class="lux-title">Constanza</h1>
+    <p class="lux-sub">Mis 15 años</p>
+    <button onclick="startExperience()">Abrir Invitación</button>
   </div>
 </div>
 
-<!-- PARTICLES -->
-<canvas id="bg"></canvas>
+<!-- FONDO -->
+<canvas id="particles"></canvas>
 
-<!-- CONTENIDO -->
+<!-- APP -->
 <div id="app">
 
-<section class="block hero">
+<section class="section hero">
   <h1 class="title">Constanza</h1>
-  <p class="subtitle">11 de Julio 2026</p>
+  <p class="subtitle">11 · 07 · 2026</p>
 </section>
 
-<section class="block fade">
+<section class="section reveal">
   <h2>Faltan</h2>
-  <div id="countdown"></div>
+  <div id="countdown" class="count"></div>
 </section>
 
-<section class="block fade">
-  <h2>¿Dónde?</h2>
+<section class="section reveal">
+  <h2>Lugar</h2>
   <p>Salón A.E.F.I.P.</p>
-  <a href="https://maps.app.goo.gl/2fHLRixuznUjLptz8" target="_blank">VER UBICACIÓN</a>
+  <a class="btn glow" href="https://maps.app.goo.gl/2fHLRixuznUjLptz8" target="_blank">Ver ubicación</a>
 </section>
 
-<section class="block fade">
+<section class="section reveal">
   <h2>Dress Code</h2>
   <p>Elegante Sport</p>
 </section>
 
-<section class="block fade">
+<section class="section reveal">
   <h2>Regalos</h2>
-  <p>Tu presencia es mi mejor regalo 💖</p>
+  <p>Tu presencia es lo más importante 💖</p>
 </section>
 
-<section class="block fade">
-  <a class="btn" href="https://wa.me/549XXXXXXXXXX">CONFIRMAR ASISTENCIA</a>
+<section class="section reveal">
+  <a class="btn main-btn" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
 </section>
 
 </div>
 
-<!-- MÚSICA -->
 <iframe id="music"
 src="https://www.youtube.com/embed/h5jz8xdpR0M?enablejsapi=1&loop=1&playlist=h5jz8xdpR0M"
 frameborder="0"></iframe>
