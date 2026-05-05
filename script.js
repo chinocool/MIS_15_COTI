@@ -20,6 +20,16 @@ function enter(withMusic){
   reveal();
 }
 
+// REVEAL
+function reveal(){
+  document.querySelectorAll(".section").forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight-100){
+      el.classList.add("visible");
+    }
+  });
+}
+window.addEventListener("scroll", reveal);
+
 // COUNTDOWN
 const target = new Date("July 11, 2026 21:00:00").getTime();
 
@@ -37,62 +47,37 @@ setInterval(()=>{
   el.innerHTML = `${d} días · ${h} hs · ${m} min`;
 },1000);
 
-// SCROLL
-function reveal(){
-  document.querySelectorAll(".section").forEach(el=>{
-    if(el.getBoundingClientRect().top < window.innerHeight-100){
-      el.classList.add("visible");
-    }
-  });
-}
-window.addEventListener("scroll", reveal);
-
 // SLIDER SWIPE
 const slider = document.getElementById("slider");
 const track = document.getElementById("track");
 
-let isDown = false;
-let startX;
-let scrollLeft = 0;
+let startX = 0;
 
-slider.addEventListener("mousedown", (e)=>{
-  isDown = true;
-  startX = e.pageX;
-});
-
-slider.addEventListener("mouseleave", ()=> isDown = false);
-slider.addEventListener("mouseup", ()=> isDown = false);
-
-slider.addEventListener("mousemove", (e)=>{
-  if(!isDown) return;
-  const walk = (e.pageX - startX);
-  track.style.transform = `translateX(${scrollLeft + walk}px)`;
-});
-
-slider.addEventListener("touchstart", (e)=>{
+slider.addEventListener("touchstart", e=>{
   startX = e.touches[0].clientX;
 });
 
-slider.addEventListener("touchmove", (e)=>{
+slider.addEventListener("touchmove", e=>{
   const walk = e.touches[0].clientX - startX;
   track.style.transform = `translateX(${walk}px)`;
 });
 
-// FONDO PARTICULAS
+// ✨ GLITTER PREMIUM
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particles = [];
+let particles=[];
 
-for(let i=0;i<40;i++){
+for(let i=0;i<60;i++){
   particles.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
-    r:Math.random()*2,
-    s:Math.random()*0.3
+    r:Math.random()*6,
+    s:Math.random()*0.3,
+    a:Math.random()*0.3
   });
 }
 
@@ -100,13 +85,17 @@ function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
   particles.forEach(p=>{
+    let g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
+    g.addColorStop(0,`rgba(212,175,55,${p.a})`);
+    g.addColorStop(1,"transparent");
+
+    ctx.fillStyle=g;
     ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle="rgba(212,175,55,0.3)";
+    ctx.arc(p.x,p.y,p.r*4,0,Math.PI*2);
     ctx.fill();
 
-    p.y+=p.s;
-    if(p.y>canvas.height) p.y=0;
+    p.y += p.s;
+    if(p.y > canvas.height) p.y = 0;
   });
 }
 
