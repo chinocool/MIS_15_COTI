@@ -66,18 +66,27 @@ body {
 .big { font-size:60px; }
 
 /* BOTONES */
+/* ✨ BOTONES LUJO INTENSO */
 button, .btn {
-  padding:12px 25px;
-  border:1px solid gold;
+  padding:12px 28px;
+  border:1px solid rgba(212,175,55,0.6);
   background:rgba(0,0,0,0.4);
   color:#d4af37;
   border-radius:30px;
   cursor:pointer;
-  transition:0.3s;
+  transition:all 0.3s ease;
 }
 
+/* 🔥 HOVER FUERTE (como antes pero mejor) */
 button:hover, .btn:hover {
-  box-shadow:0 0 15px rgba(212,175,55,0.5);
+  background:rgba(212,175,55,0.15);
+
+  box-shadow:
+    0 0 10px rgba(212,175,55,0.6),
+    0 0 30px rgba(212,175,55,0.5),
+    0 0 60px rgba(212,175,55,0.3);
+
+  transform:translateY(-2px) scale(1.05);
 }
 
 /* APP */
