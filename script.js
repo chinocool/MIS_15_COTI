@@ -33,8 +33,7 @@ setInterval(()=>{
   const m = Math.floor((diff/(1000*60))%60);
   const s = Math.floor((diff / 1000) % 60);
 
-  el.innerHTML = `${d} días · ${h} hs · ${m} min · ${s} seg`;
-  el.innerHTML = `<br>días hs min seg`;
+  el.innerHTML = `${d} días · ${h} hs · ${m} min · ${s} seg <br>días hs min seg`;
 },1000);
 
 //////////////////////////////////////////////////
