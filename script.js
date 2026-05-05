@@ -6,19 +6,18 @@ function enter(withMusic){
   if(withMusic){
     const audio = document.getElementById("audio");
     audio.volume = 0;
-
     audio.play().catch(()=>{});
 
     let v=0;
     let fade = setInterval(()=>{
-      if(v < 0.3){
+      if(v < 0.4){
         v += 0.02;
         audio.volume = v;
-      } else {
-        clearInterval(fade);
-      }
-    },100);
+      } else clearInterval(fade);
+    },120);
   }
+
+  reveal();
 }
 
 // COUNTDOWN
@@ -38,6 +37,18 @@ setInterval(()=>{
   el.innerHTML = `${d} días · ${h} hs · ${m} min`;
 },1000);
 
+// SCROLL
+function reveal(){
+  document.querySelectorAll(".section").forEach(el=>{
+    const top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      el.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll", reveal);
+
 // SLIDER
 let index = 0;
 
@@ -50,6 +61,6 @@ setInterval(()=>{
   index++;
   if(index >= total) index = 0;
 
-  track.style.transform = `translateX(-${index * 280}px)`;
+  track.style.transform = `translateX(-${index * 300}px)`;
 
-},3500);
+},4000);
