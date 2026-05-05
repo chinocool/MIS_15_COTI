@@ -11,7 +11,21 @@ window.enter = function(withMusic){
 
   if(withMusic){
     const audio = document.getElementById("audio");
-    audio.play().catch(()=>{});
+
+    audio.currentTime = 0;
+    audio.volume = 0.4;
+
+    const playPromise = audio.play();
+
+    if(playPromise !== undefined){
+      playPromise
+        .then(() => {
+          console.log("🎵 música iniciada");
+        })
+        .catch(err => {
+          console.log("⚠️ autoplay bloqueado", err);
+        });
+    }
   }
 }
 
