@@ -1,9 +1,24 @@
-function entrar(){
+function enter(withMusic){
+
   document.getElementById("intro").style.display="none";
   document.getElementById("app").style.display="block";
 
-  const audio = document.getElementById("audio");
-  audio.play().catch(()=>{});
+  if(withMusic){
+    const audio = document.getElementById("audio");
+    audio.volume = 0;
+
+    audio.play().catch(()=>{});
+
+    let v=0;
+    let fade = setInterval(()=>{
+      if(v < 0.3){
+        v += 0.02;
+        audio.volume = v;
+      } else {
+        clearInterval(fade);
+      }
+    },100);
+  }
 }
 
 // COUNTDOWN
@@ -20,11 +35,11 @@ setInterval(()=>{
   const h = Math.floor((diff/(1000*60*60))%24);
   const m = Math.floor((diff/(1000*60))%60);
 
-  el.innerHTML = `${d} días ${h} hs ${m} min`;
+  el.innerHTML = `${d} días · ${h} hs · ${m} min`;
 },1000);
 
 // SLIDER
-let i=0;
+let index = 0;
 
 setInterval(()=>{
   const track = document.getElementById("track");
@@ -32,9 +47,9 @@ setInterval(()=>{
 
   const total = track.children.length;
 
-  i++;
-  if(i >= total) i = 0;
+  index++;
+  if(index >= total) index = 0;
 
-  track.style.transform = `translateX(-${i*210}px)`;
+  track.style.transform = `translateX(-${index * 280}px)`;
 
-},3000);
+},3500);
