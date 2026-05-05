@@ -11,7 +11,7 @@ body {
   display:flex;
   width:100vw;
   height:100vh;
-  transition:transform 0.5s ease;
+  transition:transform 0.6s cubic-bezier(.22,1,.36,1);
 }
 
 .page {
@@ -22,17 +22,34 @@ body {
   justify-content:center;
   align-items:center;
   padding:20px;
+  transform:scale(0.9);
+  opacity:0.4;
+  transition:all 0.6s ease;
 }
 
-/* TEXTO */
+.page.active {
+  transform:scale(1);
+  opacity:1;
+}
+
+/* TEXTO LUJO REAL */
 .lux {
   font-family:'Playfair Display';
-  background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37);
+  background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37,#e6c200);
+  background-size:300%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  animation:shine 6s linear infinite;
 }
 
-.big { font-size:60px; }
+@keyframes shine {
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.big {
+  font-size:64px;
+}
 
 /* DOTS */
 #dots {
@@ -41,21 +58,23 @@ body {
   width:100%;
   display:flex;
   justify-content:center;
-  gap:8px;
+  gap:10px;
 }
 
 #dots span {
   width:8px;
   height:8px;
-  background:#555;
+  background:#444;
   border-radius:50%;
+  transition:0.3s;
 }
 
 #dots .active {
+  width:20px;
   background:#d4af37;
 }
 
-/* SLIDER */
+/* 🎥 SLIDER TIPO NETFLIX */
 .slider {
   overflow:hidden;
   width:100%;
@@ -64,20 +83,21 @@ body {
 .track {
   display:flex;
   gap:20px;
+  transition:transform 0.5s ease;
 }
 
 .track img {
-  width:220px;
-  height:300px;
-  border-radius:16px;
+  width:200px;
+  height:280px;
+  border-radius:14px;
+  object-fit:cover;
+  opacity:0.5;
+  transform:scale(0.85);
+  transition:0.4s;
 }
 
-/* INTRO */
-#intro {
-  position:fixed;
-  width:100%;
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.track img.active {
+  opacity:1;
+  transform:scale(1.1);
+  box-shadow:0 20px 50px rgba(0,0,0,0.9);
 }
