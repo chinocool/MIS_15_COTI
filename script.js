@@ -165,11 +165,29 @@ function snapToClosest(){
 }
 
 function fixLoop(){
+
   const width = track.scrollWidth / 2;
 
-  if(Math.abs(current) >= width){
-    current = 0;
+  // si te pasás hacia la izquierda
+  if(current < -width){
+    current += width;
+    track.style.transition = "none";
     track.style.transform = `translateX(${current}px)`;
+
+    track.offsetHeight; // reflow
+
+    track.style.transition = "transform .4s ease";
+  }
+
+  // si te pasás hacia la derecha
+  if(current > 0){
+    current -= width;
+    track.style.transition = "none";
+    track.style.transform = `translateX(${current}px)`;
+
+    track.offsetHeight;
+
+    track.style.transition = "transform .4s ease";
   }
 }
 
