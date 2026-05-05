@@ -3,63 +3,43 @@ body {
   font-family:'Montserrat';
   background:black;
   color:#d4af37;
+  overflow-x:hidden;
 }
 
-/* MOBILE = APP */
-@media (max-width: 768px){
-
-  body {
-    overflow:hidden;
-  }
-
-  #pages {
-    display:flex;
-    width:100vw;
-    height:100vh;
-    transition:transform 0.6s cubic-bezier(.22,1,.36,1);
-  }
-
-  .page {
-    min-width:100vw;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    opacity:0.5;
-    transform:scale(0.9);
-    transition:0.5s;
-  }
-
-  .page.active {
-    opacity:1;
-    transform:scale(1);
-  }
-
+/* INTRO */
+#intro {
+  position:fixed;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
 }
 
-/* DESKTOP = SCROLL NORMAL */
-@media (min-width: 769px){
+.intro-bg {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:url("media/foto/coti_intro.jpeg") center no-repeat;
+  background-size:contain;
+  animation:zoomIntro 6s ease forwards;
+}
 
-  body {
-    overflow-y:auto;
-  }
+@keyframes zoomIntro {
+  from {transform:scale(1.2);}
+  to {transform:scale(1);}
+}
 
-  #pages {
-    display:block;
-  }
+.intro-overlay {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.9));
+}
 
-  .page {
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    opacity:1;
-    transform:none;
-  }
-
+.intro-content {
+  position:relative;
 }
 
 /* TEXTO */
@@ -72,6 +52,58 @@ body {
 
 .big { font-size:60px; }
 
+/* BOTONES */
+button, .btn {
+  padding:12px 25px;
+  border:1px solid gold;
+  background:transparent;
+  color:gold;
+}
+
+/* APP */
+#app { display:none; }
+
+/* PAGES MOBILE */
+@media (max-width:768px){
+
+  body { overflow:hidden; }
+
+  #pages {
+    display:flex;
+    width:100vw;
+    height:100vh;
+    transition:transform 0.5s ease;
+  }
+
+  .page {
+    min-width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+  }
+
+}
+
+/* DESKTOP */
+@media (min-width:769px){
+
+  #pages {
+    display:block;
+  }
+
+  .page {
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+  }
+
+  #dots { display:none; }
+}
+
 /* DOTS */
 #dots {
   position:fixed;
@@ -79,7 +111,7 @@ body {
   width:100%;
   display:flex;
   justify-content:center;
-  gap:10px;
+  gap:8px;
 }
 
 #dots span {
@@ -94,9 +126,7 @@ body {
 }
 
 /* SLIDER */
-.slider {
-  overflow:hidden;
-}
+.slider { overflow:hidden; }
 
 .track {
   display:flex;
@@ -108,4 +138,10 @@ body {
   height:300px;
   border-radius:16px;
   object-fit:cover;
+}
+
+/* REGALOS */
+.gift-box img {
+  width:60px;
+  max-width:60px;
 }
