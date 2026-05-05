@@ -1,8 +1,8 @@
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
   background: black;
-  color: gold;
+  color: #d4af37;
+  font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
 }
 
@@ -15,61 +15,67 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  z-index: 100;
 }
 
-.intro-box {
-  text-align: center;
-}
-
-.intro-box h1 {
+.intro-content h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 50px;
+  font-size: 60px;
 }
 
 button {
-  margin-top: 20px;
-  padding: 10px 25px;
-  background: transparent;
   border: 1px solid gold;
+  background: transparent;
   color: gold;
+  padding: 12px 30px;
+  margin-top: 20px;
   cursor: pointer;
 }
 
-/* CONTENIDO */
-#contenido {
-  display: none;
-  text-align: center;
-}
-
-.hero {
-  height: 100vh;
+/* BLOQUES */
+.block {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
-/* BOTÓN */
-.btn {
+/* HERO */
+.hero {
+  text-align: center;
+}
+
+.title {
+  font-size: 70px;
+  font-family: 'Playfair Display';
+}
+
+.subtitle {
+  letter-spacing: 4px;
+}
+
+/* BOTONES */
+a {
   border: 1px solid gold;
-  padding: 12px 25px;
-  display: inline-block;
-  margin-top: 20px;
+  padding: 12px 30px;
+  text-decoration: none;
+  color: gold;
 }
 
-.btn:hover {
+a:hover {
   background: gold;
   color: black;
 }
 
-/* FADE */
+/* ANIMACIONES */
 .fade {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(50px);
   transition: 1s;
 }
 
-.fade.visible {
+.fade.show {
   opacity: 1;
   transform: translateY(0);
 }
