@@ -4,45 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Constanza - Mis 15</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- LOADER -->
-<div id="loader"></div>
-
-<!-- SOBRE -->
-<div id="envelope">
-  <div class="card">
-    <div class="cover"></div>
-
-    <div class="content">
-      <div class="overlay"></div>
-
-      <div class="text">
-        <h1>Constanza</h1>
-        <p>Mis 15 años</p>
-        <button onclick="openEnvelope()">Abrir invitación</button>
-      </div>
-    </div>
+<!-- PORTADA -->
+<div id="intro">
+  <div class="intro-card">
+    <h1>Constanza</h1>
+    <p>Mis 15 años</p>
+    <button onclick="entrar()">Entrar</button>
   </div>
 </div>
 
-<!-- MÚSICA -->
-<div id="musicChoice">
-  <h2>Elegí tu experiencia</h2>
-  <button onclick="enter(true)">Con música</button>
-  <button onclick="enter(false)">Sin música</button>
-</div>
-
+<!-- AUDIO -->
 <audio id="audio" loop>
   <source src="media/musica/musica15coti.mp3">
 </audio>
 
-<!-- APP -->
+<!-- CONTENIDO -->
 <div id="app">
 
 <section class="hero">
@@ -50,12 +31,12 @@
   <p>11 de Julio 2026</p>
 </section>
 
-<section class="section">
-  <h2>Faltan</h2>
+<section>
+  <h2>Cuenta regresiva</h2>
   <div id="countdown"></div>
 </section>
 
-<section class="section">
+<section>
   <h2>Lugar</h2>
   <p>Salón A.E.F.I.P.</p>
   <a href="https://maps.app.goo.gl/2fHLRixuznUjLptz8" target="_blank">
@@ -63,19 +44,18 @@
   </a>
 </section>
 
-<section class="section">
-  <h2>Momentos</h2>
+<section>
+  <h2>Fotos</h2>
 
   <div class="slider">
-    <div class="track" id="track">
-      <img src="media/foto/coti_seccion1.jpg">
-      <img src="media/foto/coti_seccion2.jpg">
-      <img src="media/foto/coti_seccion3.jpg">
-    </div>
+    <img src="media/foto/coti_seccion1.jpg">
+    <img src="media/foto/coti_seccion2.jpg">
+    <img src="media/foto/coti_seccion3.jpg">
   </div>
+
 </section>
 
-<section class="section">
+<section>
   <a href="https://wa.me/549XXXXXXXXXX" class="btn">
     Confirmar asistencia
   </a>
