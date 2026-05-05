@@ -7,34 +7,55 @@ body {
   overflow-x:hidden;
 }
 
-/* INTRO */
+/* INTRO ZOOM SUAVE */
 #intro {
   position:fixed;
   width:100%;
   height:100%;
-  background:url("media/foto/coti_intro.jpeg") center/cover no-repeat;
+  overflow:hidden;
   display:flex;
   justify-content:center;
   align-items:center;
+}
+
+.intro-bg {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:url("media/foto/coti_intro.jpeg") center no-repeat;
+  background-size:contain;
+  animation:zoomIntro 6s ease forwards;
+}
+
+@keyframes zoomIntro {
+  from {transform:scale(1.2);}
+  to {transform:scale(1);}
 }
 
 .intro-overlay {
   position:absolute;
   width:100%;
   height:100%;
-  background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.85));
+  background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85));
 }
 
 .intro-content {
   position:relative;
 }
 
-/* TEXTO */
+/* TEXTO DORADO ANIMADO */
 .lux {
   font-family:'Playfair Display';
-  background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37);
+  background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37,#e6c200);
+  background-size:300%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  animation:shine 6s linear infinite;
+}
+
+@keyframes shine {
+  0%{background-position:0%}
+  100%{background-position:200%}
 }
 
 .big { font-size:90px; }
@@ -53,14 +74,6 @@ button, .btn {
   display:none;
 }
 
-/* HERO */
-.hero {
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
 /* SECCIONES */
 .section {
   padding:100px 20px;
@@ -77,14 +90,12 @@ button, .btn {
 /* SLIDER */
 .slider {
   overflow:hidden;
-  width:100%;
-  touch-action:pan-y;
 }
 
 .track {
   display:flex;
   gap:20px;
-  transition:transform 0.3s ease;
+  transition:transform 0.4s ease;
 }
 
 .track img {
@@ -99,6 +110,10 @@ button, .btn {
   background:rgba(255,255,255,0.02);
 }
 
-.gift-box img {
-  width:140px;
+/* FONDO GLITTER */
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
 }
