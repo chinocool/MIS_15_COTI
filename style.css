@@ -1,0 +1,58 @@
+body {
+  margin:0;
+  font-family:Arial;
+  background:black;
+  color:gold;
+  text-align:center;
+}
+
+#intro {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:url("media/foto/coti_intro.jpeg") center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.intro-card {
+  background:rgba(0,0,0,0.6);
+  padding:30px;
+}
+
+button {
+  padding:10px 20px;
+  border:1px solid gold;
+  background:transparent;
+  color:gold;
+}
+
+#app {
+  display:none;
+}
+
+.hero {
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+/* SLIDER */
+.slider {
+  overflow:hidden;
+  width:100%;
+}
+
+.track {
+  display:flex;
+  gap:10px;
+  transition:0.5s;
+}
+
+.track img {
+  width:200px;
+  height:300px;
+  object-fit:cover;
+}
