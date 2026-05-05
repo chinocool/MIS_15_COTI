@@ -6,8 +6,8 @@ body {
   overflow-x:hidden;
 }
 
-/* SOBRE */
-#envelope {
+/* LOADER */
+#loader {
   position:fixed;
   width:100%;
   height:100%;
@@ -15,50 +15,53 @@ body {
   display:flex;
   justify-content:center;
   align-items:center;
+  z-index:300;
+}
+
+.loader-text {
+  font-size:24px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%{opacity:0.3}
+  50%{opacity:1}
+  100%{opacity:0.3}
+}
+
+/* SOBRE 3D */
+#envelope {
+  position:fixed;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  perspective:1000px;
   z-index:200;
 }
 
-.flap {
-  position:absolute;
+.env {
   width:300px;
   height:200px;
+  position:relative;
+  transform-style:preserve-3d;
+}
+
+.env-flap {
+  position:absolute;
+  width:100%;
+  height:100%;
   background:#111;
   transform-origin:top;
   transition:1s;
 }
 
-.card {
-  text-align:center;
-  z-index:2;
-}
-
-.open .flap {
+.open .env-flap {
   transform:rotateX(180deg);
 }
 
-/* MUSIC CHOICE */
-#musicChoice {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:150;
-}
-
-/* CONTROL */
-#musicControl {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  font-size:20px;
-  cursor:pointer;
-}
-
-/* LUX TEXT */
+/* LUX */
 .lux {
   font-family:'Playfair Display';
   font-size:80px;
@@ -73,43 +76,18 @@ body {
   100%{background-position:-200%}
 }
 
-/* SECCIONES */
-.section {
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
-
-/* BOTÓN */
+/* BOTON */
 .btn {
   padding:12px 30px;
   border:1px solid gold;
   color:gold;
   text-decoration:none;
-  position:relative;
-  overflow:hidden;
-}
-
-.btn::before {
-  content:"";
-  position:absolute;
-  width:200%;
-  height:100%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
-  left:-100%;
-  transition:0.5s;
-}
-
-.btn:hover::before {
-  left:100%;
 }
 
 /* REVEAL */
 .reveal {
   opacity:0;
-  transform:translateY(80px);
+  transform:translateY(60px);
 }
 
 .reveal.active {
@@ -118,7 +96,7 @@ body {
   transition:1.2s;
 }
 
-/* PARTICLES */
+/* CANVAS */
 canvas {
   position:fixed;
   top:0;
