@@ -5,22 +5,17 @@ let musicOn = false;
 
 // LOADER
 setTimeout(()=>{
-  const loader = document.getElementById("loader");
-  loader.style.opacity = 0;
-  setTimeout(()=> loader.style.display="none",800);
-},1200);
+  document.getElementById("loader").style.display="none";
+},1000);
 
 // SOBRE
 window.openEnvelope = function(){
   document.querySelector(".env").classList.add("open");
 
   setTimeout(()=>{
-    document.getElementById("envelope").style.opacity=0;
-    setTimeout(()=>{
-      document.getElementById("envelope").style.display="none";
-      document.getElementById("musicChoice").style.display="flex";
-    },600);
-  },1000);
+    document.getElementById("envelope").style.display="none";
+    document.getElementById("musicChoice").style.display="flex";
+  },800);
 }
 
 // ENTRAR
@@ -33,21 +28,39 @@ window.enter = function(withMusic){
   if(musicOn){
     audio.volume=0;
     audio.play();
-    fadeAudio();
+
+    let v=0;
+    let i=setInterval(()=>{
+      if(v<0.3){ v+=0.02; audio.volume=v; }
+      else clearInterval(i);
+    },100);
   }
 
   reveal();
 }
 
-function fadeAudio(){
-  let v=0;
-  let i=setInterval(()=>{
-    if(v<0.3){ v+=0.02; audio.volume=v; }
-    else clearInterval(i);
-  },100);
+// AUDIO
+window.toggleMusic = function(){
+  if(audio.paused) audio.play();
+  else audio.pause();
 }
 
-// REVEAL
+// COUNTDOWN
+const target = new Date("July 11, 2026 21:00:00").getTime();
+
+setInterval(()=>{
+  const now = new Date().getTime();
+  const diff = target-now;
+
+  const d = Math.floor(diff/(1000*60*60*24));
+  const h = Math.floor((diff/(1000*60*60))%24);
+  const m = Math.floor((diff/(1000*60))%60);
+
+  document.getElementById("countdown").innerHTML =
+    `${d} días · ${h} hs · ${m} min`;
+},1000);
+
+// SCROLL
 function reveal(){
   document.querySelectorAll(".reveal").forEach(el=>{
     if(el.getBoundingClientRect().top < window.innerHeight-100){
@@ -68,9 +81,9 @@ setInterval(()=>{
   s.style.transform=`translateX(-${i*280}px)`;
 
   if(i>2) i=0;
-},3500);
+},3000);
 
-// FONDO FINO
+// FONDO
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
@@ -78,8 +91,8 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 let p=[];
-for(let i=0;i<35;i++){
-  p.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2,s:Math.random()*0.3});
+for(let i=0;i<30;i++){
+  p.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2,s:Math.random()*0.2});
 }
 
 function draw(){
