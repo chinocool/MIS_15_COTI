@@ -23,6 +23,7 @@ body {
   overflow:hidden;
 }
 
+/* ✨ FOTO CINEMATOGRÁFICA */
 .intro-bg {
   position:absolute;
   width:100%;
@@ -37,51 +38,43 @@ body {
   animation:zoomIntro 8s ease forwards;
 }
 
-/* ✨ efecto máscara elegante */
+@keyframes zoomIntro {
+  from {transform:scale(1.2);}
+  to {transform:scale(1);}
+}
+
+/* degradado elegante */
 #intro::after {
   content:"";
   position:absolute;
   bottom:0;
   width:100%;
   height:40%;
-
   background:linear-gradient(to top, black, transparent);
-}
-
-@keyframes zoomIntro {
-  from {transform:scale(1.2);}
-  to {transform:scale(1);}
 }
 
 .intro-overlay {
   position:absolute;
   width:100%;
   height:100%;
-  background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.9));
+  background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8));
 }
 
-/* 🔥 CENTRADO REAL */
+/* CENTRADO */
 .intro-content {
   position:relative;
   z-index:2;
-
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-
   text-align:center;
-  width:100%;
-  max-width:90%;
-  margin:auto;
 }
 
 /* =========================
-   TITULOS DORADOS
+   TITULOS
 ========================= */
 .lux {
-  /*font-family:'Playfair Display';*/
-
   background:linear-gradient(
     120deg,
     #d4af37,
@@ -97,35 +90,30 @@ body {
   -webkit-text-fill-color:transparent;
 
   animation:shineGold 5s linear infinite;
-
-  text-shadow:
-    0 0 10px rgba(212,175,55,0.2),
-    0 0 20px rgba(212,175,55,0.1);
 }
 
-/* ✨ TITULOS CURSIVOS PREMIUM */
 h1.lux, h2.lux {
   font-family: 'Great Vibes', cursive;
   font-weight: normal;
-  letter-spacing: 1px;
+  letter-spacing:1px;
 }
 
 h1.lux {
-  font-size:110px;
-}
-
-h2.lux {
   font-size:80px;
 }
 
-@media (max-width:768px){
-  h1.lux {
-    font-size:90px;
-  }
+h2.lux {
+  font-size:48px;
+}
 
-  h2.lux {
-    font-size:60px;
-  }
+/* línea decorativa */
+h2.lux::after {
+  content:"";
+  display:block;
+  width:60px;
+  height:1px;
+  margin:10px auto 0;
+  background:linear-gradient(to right, transparent, #d4af37, transparent);
 }
 
 @keyframes shineGold {
@@ -133,13 +121,10 @@ h2.lux {
   100% { background-position:200% }
 }
 
-.big {
-  font-size:60px;
-}
-
+/* =========================
+   TEXTO
+========================= */
 .subtitle {
-  /*letter-spacing:4px;
-  font-size:14px;*/
   font-family: 'Cormorant Garamond', serif;
   font-size:18px;
   letter-spacing:1px;
@@ -149,7 +134,7 @@ h2.lux {
 }
 
 /* =========================
-   BOTONES PREMIUM
+   BOTONES
 ========================= */
 button, .btn {
   padding:12px 28px;
@@ -159,17 +144,15 @@ button, .btn {
   border-radius:30px;
   cursor:pointer;
   transition:all 0.3s ease;
+  font-family:'Cormorant Garamond', serif;
 }
 
-/* 🔥 HOVER FUERTE */
 button:hover, .btn:hover {
   background:rgba(212,175,55,0.15);
-
   box-shadow:
     0 0 10px rgba(212,175,55,0.6),
     0 0 30px rgba(212,175,55,0.5),
     0 0 60px rgba(212,175,55,0.3);
-
   transform:translateY(-2px) scale(1.05);
 }
 
@@ -204,7 +187,6 @@ button:hover, .btn:hover {
   transition:transform 0.3s ease;
 }
 
-/* BASE (NO TOCAR TAMAÑO) */
 .track img {
   width:220px;
   height:300px;
@@ -212,13 +194,11 @@ button:hover, .btn:hover {
   object-fit:cover;
   flex-shrink:0;
 
-  /* 🎥 EFECTO NETFLIX */
   opacity:0.4;
   transform:scale(0.85);
   transition:all 0.4s ease;
 }
 
-/* ACTIVA */
 .track img.active {
   opacity:1;
   transform:scale(1.1);
@@ -238,26 +218,11 @@ button:hover, .btn:hover {
 .gift-box img {
   width:60px;
   max-width:60px;
-  object-fit:contain;
 }
 
 /* =========================
-   CANVAS (GLITTER)
+   MAPA
 ========================= */
-canvas {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:0;
-  pointer-events:none;
-}
-
-/* =========================
-   MAPA PREMIUM
-========================= */
-
 .map-card {
   width:100%;
   max-width:520px;
@@ -279,12 +244,10 @@ canvas {
   gap:15px;
 }
 
-/* MAPA */
 .map-container {
   width:100%;
   border-radius:16px;
   overflow:hidden;
-  position:relative;
 }
 
 .map-container iframe {
@@ -294,23 +257,14 @@ canvas {
   filter:grayscale(0.2) contrast(1.05);
 }
 
-/* BOTÓN */
 .map-btn {
   width:100%;
   text-align:center;
 }
 
-/* MOBILE */
-@media (max-width:768px){
-  .map-container iframe {
-    height:250px;
-  }
-}
-
 /* =========================
-   COUNTDOWN PRO CORREGIDO
+   COUNTDOWN
 ========================= */
-
 .countdown {
   display:flex;
   justify-content:center;
@@ -323,48 +277,42 @@ canvas {
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:center;
-  min-width:70px;
 }
 
-/* 🔥 NUMERO */
 .cd-value {
   font-size:48px;
   font-weight:600;
   color:white;
-  line-height:1;
 }
 
-/* TEXTO ABAJO */
 .cd-label {
   font-size:12px;
   color:#d4af37;
   margin-top:6px;
-  letter-spacing:1px;
 }
 
-/* SEPARADOR */
 .cd-sep {
   width:1px;
   height:50px;
   background:rgba(212,175,55,0.4);
 }
 
-@media (max-width:768px){
-  .countdown {
-    gap:15px;
-  }
-
-  .cd-value {
-    font-size:32px;
-  }
-
-  .cd-sep {
-    height:35px;
-  }
+/* =========================
+   CANVAS
+========================= */
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
 }
 
-/* 🔊 BOTÓN MÚSICA PREMIUM */
+/* =========================
+   BOTÓN MÚSICA
+========================= */
 #music-control {
   position:fixed;
   bottom:20px;
@@ -383,54 +331,29 @@ canvas {
   font-size:22px;
 
   border:1px solid rgba(212,175,55,0.6);
-
   backdrop-filter:blur(6px);
-  cursor:pointer;
 
+  cursor:pointer;
   z-index:20;
 
   transition:all 0.3s ease;
 }
 
-/* ✨ HOVER */
-#music-control:hover {
-  box-shadow:
-    0 0 10px rgba(212,175,55,0.6),
-    0 0 25px rgba(212,175,55,0.4);
-  transform:scale(1.1);
-}
-
-/* 🔥 ACTIVO (SONANDO) */
 #music-control.active {
   animation:pulseGlow 2s infinite;
 }
 
-/* 💡 ANIMACIÓN PULSO */
 @keyframes pulseGlow {
-  0% {
-    box-shadow:0 0 5px rgba(212,175,55,0.3);
-  }
   50% {
     box-shadow:
       0 0 20px rgba(212,175,55,0.8),
       0 0 40px rgba(212,175,55,0.5);
   }
-  100% {
-    box-shadow:0 0 5px rgba(212,175,55,0.3);
-  }
 }
 
-/* ❌ APAGADO */
 #music-control.off {
   color:#888;
   border-color:#555;
-  animation:none;
-}
-
-/* BOTON DE COPIAR ALIAS */
-.copy-btn {
-  margin-top:10px;
-  transition:all 0.3s ease;
 }
 
 /* =========================
@@ -438,25 +361,15 @@ canvas {
 ========================= */
 @media (max-width:768px){
 
-  .big {
-    font-size:40px;
-  }
+  h1.lux { font-size:60px; }
+  h2.lux { font-size:36px; }
+
+  .section { padding:80px 20px; }
 
   .track img {
     width:180px;
     height:250px;
   }
 
-  .section {
-    padding:60px 20px;
-  }
-
-  button, .btn {
-    padding:10px 20px;
-    font-size:14px;
-  }
-
-  .gift-box img {
-    width:50px;
-  }
+  .cd-value { font-size:32px; }
 }
