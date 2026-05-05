@@ -79,7 +79,7 @@ setInterval(()=>{
 },1000);
 
 //////////////////////////////////////////////////
-// SLIDER PRO (INFINITO + SNAP)
+// SLIDER ULTRA PRO (APP LEVEL)
 //////////////////////////////////////////////////
 
 const slider = document.getElementById("slider");
@@ -87,7 +87,14 @@ const track = document.getElementById("track");
 
 let startX = 0;
 let current = 0;
+let velocity = 0;
+let lastX = 0;
 let isDown = false;
+let autoPlayInterval;
+
+//////////////////////////////////////////////////
+// SETUP INFINITO
+//////////////////////////////////////////////////
 
 function setupInfinite(){
   const items = Array.from(track.children);
@@ -96,21 +103,31 @@ function setupInfinite(){
     const clone = item.cloneNode(true);
     track.appendChild(clone);
   });
-
-  track.style.transform = `translateX(${current}px)`;
 }
+
+//////////////////////////////////////////////////
+// TOUCH
+//////////////////////////////////////////////////
 
 if(slider){
 
   slider.addEventListener("touchstart", e=>{
     isDown = true;
     startX = e.touches[0].clientX;
+    lastX = startX;
+    velocity = 0;
+    stopAutoplay();
   });
 
   slider.addEventListener("touchmove", e=>{
     if(!isDown) return;
 
-    const diff = e.touches[0].clientX - startX;
+    const x = e.touches[0].clientX;
+    const diff = x - startX;
+
+    velocity = x - lastX;
+    lastX = x;
+
     track.style.transform = `translateX(${current + diff}px)`;
   });
 
@@ -120,9 +137,26 @@ if(slider){
     const diff = e.changedTouches[0].clientX - startX;
     current += diff;
 
-    snapToClosest();
+    applyMomentum();
+    startAutoplay();
   });
 }
+
+//////////////////////////////////////////////////
+// INERCIA REAL
+//////////////////////////////////////////////////
+
+function applyMomentum(){
+
+  let momentum = velocity * 8;
+  current += momentum;
+
+  snapToClosest();
+}
+
+//////////////////////////////////////////////////
+// SNAP PERFECTO
+//////////////////////////////////////////////////
 
 function snapToClosest(){
 
@@ -152,68 +186,100 @@ function snapToClosest(){
 
     current += offset;
 
-    track.style.transition = "transform .4s ease";
+    track.style.transition = "transform .5s cubic-bezier(.22,.61,.36,1)";
     track.style.transform = `translateX(${current}px)`;
 
     setTimeout(()=>{
       track.style.transition = "none";
-    },400);
+    },500);
   }
 
   fixLoop();
   setActive();
 }
 
+//////////////////////////////////////////////////
+// LOOP SIN SALTO
+//////////////////////////////////////////////////
+
 function fixLoop(){
 
   const width = track.scrollWidth / 2;
 
-  // si te pasás hacia la izquierda
   if(current < -width){
     current += width;
     track.style.transition = "none";
     track.style.transform = `translateX(${current}px)`;
-
-    track.offsetHeight; // reflow
-
-    track.style.transition = "transform .4s ease";
+    track.offsetHeight;
   }
 
-  // si te pasás hacia la derecha
   if(current > 0){
     current -= width;
     track.style.transition = "none";
     track.style.transform = `translateX(${current}px)`;
-
     track.offsetHeight;
-
-    track.style.transition = "transform .4s ease";
   }
 }
+
+//////////////////////////////////////////////////
+// ACTIVO + BLUR DINÁMICO
+//////////////////////////////////////////////////
 
 function setActive(){
 
   const sliderRect = slider.getBoundingClientRect();
   const center = sliderRect.left + sliderRect.width / 2;
 
-  const images = document.querySelectorAll(".track img");
+  const images = track.querySelectorAll("img");
 
   images.forEach(img=>{
     const rect = img.getBoundingClientRect();
     const imgCenter = rect.left + rect.width / 2;
 
-    if(Math.abs(center - imgCenter) < rect.width / 2){
+    const dist = Math.abs(center - imgCenter);
+
+    if(dist < rect.width / 2){
       img.classList.add("active");
+      img.style.filter = "none";
     } else {
       img.classList.remove("active");
+
+      // 💎 blur dinámico según distancia
+      const blur = Math.min(dist / 200, 3);
+      img.style.filter = `blur(${blur}px)`;
     }
   });
 }
 
+//////////////////////////////////////////////////
+// AUTOPLAY SUAVE
+//////////////////////////////////////////////////
+
+function startAutoplay(){
+
+  autoPlayInterval = setInterval(()=>{
+    current -= 250; // velocidad autoplay
+    snapToClosest();
+  },3000);
+}
+
+function stopAutoplay(){
+  clearInterval(autoPlayInterval);
+}
+
+//////////////////////////////////////////////////
+// INIT
+//////////////////////////////////////////////////
+
 setTimeout(()=>{
   setupInfinite();
   setActive();
+  startAutoplay();
 },300);
+
+//////////////////////////////////////////////////
+// EVENTOS
+//////////////////////////////////////////////////
 
 slider.addEventListener("touchmove", setActive);
 window.addEventListener("resize", setActive);
