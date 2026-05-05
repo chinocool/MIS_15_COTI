@@ -85,11 +85,17 @@ h1.lux, h2.lux {
   font-family:'Great Vibes', cursive;
   font-weight:normal;
   letter-spacing:1px;
-  text-shadow:
+  /*text-shadow:
     0 2px 6px rgba(0,0,0,0.8),
     0 0 10px rgba(212,175,55,0.25),
-    0 0 20px rgba(212,175,55,0.15);
+    0 0 20px rgba(212,175,55,0.15);*/
+  text-shadow:
+    0 1px 3px rgba(0,0,0,0.5),      /* profundidad suave */
+    0 0 6px rgba(212,175,55,0.2);   /* brillo dorado leve */
 }
+
+
+
 
 h1.lux { font-size:80px; }
 h2.lux { font-size:48px; }
