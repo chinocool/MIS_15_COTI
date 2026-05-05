@@ -10,30 +10,41 @@
 
 <body>
 
-<!-- SOBRE -->
+<!-- LOADER CINEMATOGRAFICO -->
+<div id="loader">
+  <div class="loader-text">Cargando experiencia...</div>
+</div>
+
+<!-- SOBRE 3D -->
 <div id="envelope">
-  <div class="flap"></div>
-  <div class="card">
-    <h1>Constanza</h1>
-    <p>Mis 15 años</p>
-    <button onclick="openEnvelope()">Abrir</button>
+  <div class="env">
+    <div class="env-front"></div>
+    <div class="env-flap"></div>
+    <div class="env-card">
+      <h1>Constanza</h1>
+      <p>Mis 15</p>
+      <button onclick="openEnvelope()">Abrir</button>
+    </div>
   </div>
 </div>
 
-<!-- ELECCIÓN MÚSICA -->
+<!-- ELECCIÓN -->
 <div id="musicChoice">
-  <h2>¿Cómo querés vivir la experiencia?</h2>
+  <h2>Elegí tu experiencia</h2>
   <button onclick="enter(true)">Con música</button>
   <button onclick="enter(false)">Sin música</button>
 </div>
 
-<!-- FONDO -->
-<canvas id="bg"></canvas>
+<!-- AUDIO REAL -->
+<audio id="audio" loop>
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
 
-<!-- CONTROL MÚSICA -->
+<!-- CONTROL -->
 <div id="musicControl" onclick="toggleMusic()">🔊</div>
 
-<!-- CONTENIDO -->
+<canvas id="bg"></canvas>
+
 <div id="app">
 
 <section class="section hero">
@@ -53,24 +64,10 @@
 </section>
 
 <section class="section reveal">
-  <h2>Dress Code</h2>
-  <p>Elegante Sport</p>
-</section>
-
-<section class="section reveal">
-  <h2>Regalos</h2>
-  <p>Tu presencia es lo más importante 💖</p>
-</section>
-
-<section class="section reveal">
-  <a class="btn main" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
+  <a class="btn" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
 </section>
 
 </div>
-
-<iframe id="music"
-src="https://www.youtube.com/embed/h5jz8xdpR0M?enablejsapi=1&loop=1&playlist=h5jz8xdpR0M"
-frameborder="0"></iframe>
 
 <script src="script.js"></script>
 </body>
