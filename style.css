@@ -380,6 +380,12 @@ canvas {
   animation:none;
 }
 
+/* BOTON DE COPIAR ALIAS */
+.copy-btn {
+  margin-top:10px;
+  transition:all 0.3s ease;
+}
+
 /* =========================
    MOBILE
 ========================= */
