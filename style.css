@@ -2,9 +2,11 @@ body {
   margin:0;
   background:black;
   color:#d4af37;
-  font-family:'Montserrat';
+  font-family:'Montserrat', sans-serif;
   overflow-x:hidden;
 }
+
+body.no-scroll { overflow:hidden; }
 
 /* LOADER */
 #loader {
@@ -16,20 +18,19 @@ body {
   justify-content:center;
   align-items:center;
   z-index:300;
+  transition: opacity 1s;
 }
-
 .loader-text {
-  font-size:24px;
-  animation: pulse 2s infinite;
+  font-size:22px;
+  animation:pulse 2s infinite;
 }
-
 @keyframes pulse {
   0%{opacity:0.3}
   50%{opacity:1}
   100%{opacity:0.3}
 }
 
-/* SOBRE 3D */
+/* SOBRE */
 #envelope {
   position:fixed;
   width:100%;
@@ -37,63 +38,112 @@ body {
   display:flex;
   justify-content:center;
   align-items:center;
-  perspective:1000px;
   z-index:200;
+  background:black;
 }
-
 .env {
-  width:300px;
-  height:200px;
+  width:280px;
+  height:180px;
   position:relative;
-  transform-style:preserve-3d;
 }
-
 .env-flap {
-  position:absolute;
   width:100%;
   height:100%;
   background:#111;
   transform-origin:top;
   transition:1s;
 }
-
 .open .env-flap {
   transform:rotateX(180deg);
 }
-
-/* LUX */
-.lux {
-  font-family:'Playfair Display';
-  font-size:80px;
-  background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:shine 4s linear infinite;
+.env-card {
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
 
+/* MUSIC CHOICE */
+#musicChoice {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:150;
+}
+.btn-group button {
+  margin:10px;
+}
+
+/* BOTONES */
+button, .btn {
+  padding:12px 25px;
+  border:1px solid #d4af37;
+  background:transparent;
+  color:#d4af37;
+  cursor:pointer;
+  transition:.3s;
+}
+button:hover, .btn:hover {
+  background:#d4af37;
+  color:black;
+}
+
+/* TEXTO LUJO */
+.lux {
+  font-family:'Playfair Display';
+  font-size:70px;
+  background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37);
+  background-size:200%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 5s linear infinite;
+}
 @keyframes shine {
   0%{background-position:200%}
   100%{background-position:-200%}
 }
 
-/* BOTON */
-.btn {
-  padding:12px 30px;
-  border:1px solid gold;
-  color:gold;
-  text-decoration:none;
+/* APP */
+#app { display:none; }
+#app.active { display:block; }
+
+/* SECCIONES */
+.section {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
+.subtitle { letter-spacing:4px; }
 
 /* REVEAL */
 .reveal {
   opacity:0;
   transform:translateY(60px);
 }
-
 .reveal.active {
   opacity:1;
   transform:translateY(0);
-  transition:1.2s;
+  transition:1.2s ease;
+}
+
+/* CONTROL */
+#musicControl {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  cursor:pointer;
+  z-index:50;
 }
 
 /* CANVAS */
