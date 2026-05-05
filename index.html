@@ -11,10 +11,15 @@
 
 <body>
 
+<!-- LOADER -->
 <div id="loader">
-  <div class="loader-text">Cargando experiencia...</div>
+  <div class="loader-inner">
+    <div class="loader-line"></div>
+    <p>Cargando experiencia</p>
+  </div>
 </div>
 
+<!-- SOBRE -->
 <div id="envelope">
   <div class="env">
     <div class="env-flap"></div>
@@ -24,16 +29,14 @@
       <p>Mis 15 años</p>
       <button onclick="openEnvelope()">Abrir</button>
     </div>
-
   </div>
 </div>
 
+<!-- MÚSICA -->
 <div id="musicChoice">
   <h2>¿Cómo querés vivir la experiencia?</h2>
-  <div class="btn-group">
-    <button onclick="enter(true)">Con música</button>
-    <button onclick="enter(false)">Sin música</button>
-  </div>
+  <button onclick="enter(true)">Con música</button>
+  <button onclick="enter(false)">Sin música</button>
 </div>
 
 <audio id="audio" loop>
@@ -47,7 +50,7 @@
 <div id="app">
 
 <section class="section hero">
-  <h1 class="lux">Constanza</h1>
+  <h1 class="lux big">Constanza</h1>
   <p class="subtitle">11 · 07 · 2026</p>
 </section>
 
@@ -63,18 +66,7 @@
 </section>
 
 <section class="section reveal">
-  <h2>Dress Code</h2>
-  <p>Elegante Sport</p>
-</section>
-
-<section class="section reveal">
-  <h2>Regalos</h2>
-  <p>Tu presencia es lo más importante 💖</p>
-</section>
-
-<section class="section reveal">
   <h2>Momentos</h2>
-
   <div class="slider">
     <div class="slides" id="slides">
       <img src="media/foto/coti_seccion1.jpg">
@@ -85,7 +77,7 @@
 </section>
 
 <section class="section reveal">
-  <a class="btn" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
+  <a class="btn main" href="https://wa.me/549XXXXXXXXXX">Confirmar asistencia</a>
 </section>
 
 </div>
