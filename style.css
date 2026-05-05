@@ -16,12 +16,6 @@ body {
   display:flex;
   justify-content:center;
   align-items:center;
-  animation:fadeIntro 1.5s ease;
-}
-
-@keyframes fadeIntro {
-  from {opacity:0; transform:scale(1.05);}
-  to {opacity:1; transform:scale(1);}
 }
 
 .intro-overlay {
@@ -39,24 +33,12 @@ body {
 .lux {
   font-family:'Playfair Display';
   background:linear-gradient(120deg,#d4af37,#fff3b0,#d4af37);
-  background-size:200%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:shine 6s linear infinite;
 }
 
-@keyframes shine {
-  0%{background-position:200%}
-  100%{background-position:-200%}
-}
-
-.big {
-  font-size:90px;
-}
-
-.subtitle {
-  letter-spacing:6px;
-}
+.big { font-size:90px; }
+.subtitle { letter-spacing:6px; }
 
 /* BOTONES */
 button, .btn {
@@ -64,24 +46,11 @@ button, .btn {
   border:1px solid gold;
   background:transparent;
   color:gold;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-button:hover, .btn:hover {
-  background:gold;
-  color:black;
 }
 
 /* APP */
 #app {
   display:none;
-  animation:fadeApp 1.5s ease;
-}
-
-@keyframes fadeApp {
-  from {opacity:0;}
-  to {opacity:1;}
 }
 
 /* HERO */
@@ -102,18 +71,20 @@ button:hover, .btn:hover {
 .section.visible {
   opacity:1;
   transform:translateY(0);
-  transition:1.2s ease;
+  transition:1s;
 }
 
 /* SLIDER */
 .slider {
   overflow:hidden;
+  width:100%;
+  touch-action:pan-y;
 }
 
 .track {
   display:flex;
-  gap:30px;
-  transition:transform 1s ease;
+  gap:20px;
+  transition:transform 0.3s ease;
 }
 
 .track img {
@@ -121,7 +92,6 @@ button:hover, .btn:hover {
   height:380px;
   border-radius:20px;
   object-fit:cover;
-  box-shadow:0 20px 60px rgba(0,0,0,0.9);
 }
 
 /* REGALOS */
@@ -129,14 +99,6 @@ button:hover, .btn:hover {
   background:rgba(255,255,255,0.02);
 }
 
-.gift-box {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:20px;
-}
-
 .gift-box img {
   width:140px;
-  filter:brightness(1.2);
 }
