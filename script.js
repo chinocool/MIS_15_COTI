@@ -1,64 +1,53 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-let musicOn = false;
 const audio = document.getElementById("audio");
+let musicOn = false;
 
-document.body.classList.add("no-scroll");
-
+// LOADER
 setTimeout(()=>{
-  document.getElementById("loader").style.display="none";
+  const loader = document.getElementById("loader");
+  loader.style.opacity = 0;
+  setTimeout(()=> loader.style.display="none",800);
 },1200);
 
+// SOBRE
 window.openEnvelope = function(){
   document.querySelector(".env").classList.add("open");
 
   setTimeout(()=>{
-    document.getElementById("envelope").style.display="none";
-    document.getElementById("musicChoice").style.display="flex";
-  },900);
+    document.getElementById("envelope").style.opacity=0;
+    setTimeout(()=>{
+      document.getElementById("envelope").style.display="none";
+      document.getElementById("musicChoice").style.display="flex";
+    },600);
+  },1000);
 }
 
+// ENTRAR
 window.enter = function(withMusic){
   musicOn = withMusic;
 
   document.getElementById("musicChoice").style.display="none";
-  document.getElementById("app").classList.add("active");
-  document.body.classList.remove("no-scroll");
+  document.getElementById("app").style.display="block";
 
   if(musicOn){
-    audio.volume = 0;
+    audio.volume=0;
     audio.play();
-    let v=0;
-    let i=setInterval(()=>{
-      if(v<0.3){ v+=0.02; audio.volume=v; }
-      else clearInterval(i);
-    },100);
+    fadeAudio();
   }
 
   reveal();
 }
 
-window.toggleMusic = function(){
-  if(audio.paused) audio.play();
-  else audio.pause();
+function fadeAudio(){
+  let v=0;
+  let i=setInterval(()=>{
+    if(v<0.3){ v+=0.02; audio.volume=v; }
+    else clearInterval(i);
+  },100);
 }
 
-// COUNTDOWN
-const target = new Date("July 11, 2026 21:00:00").getTime();
-
-setInterval(()=>{
-  const now = new Date().getTime();
-  const diff = target-now;
-
-  const d = Math.floor(diff/(1000*60*60*24));
-  const h = Math.floor((diff/(1000*60*60))%24);
-  const m = Math.floor((diff/(1000*60))%60);
-
-  document.getElementById("countdown").innerHTML =
-    `${d} días · ${h} hs · ${m} min`;
-},1000);
-
-// SCROLL
+// REVEAL
 function reveal(){
   document.querySelectorAll(".reveal").forEach(el=>{
     if(el.getBoundingClientRect().top < window.innerHeight-100){
@@ -66,60 +55,44 @@ function reveal(){
     }
   });
 }
+
 window.addEventListener("scroll", reveal);
 
 // SLIDER
-let slideIndex = 0;
+let i=0;
 setInterval(()=>{
-  const slides = document.getElementById("slides");
-  if(!slides) return;
+  const s=document.getElementById("slides");
+  if(!s) return;
 
-  slideIndex++;
-  slides.style.transform = `translateX(-${slideIndex*270}px)`;
+  i++;
+  s.style.transform=`translateX(-${i*280}px)`;
 
-  if(slideIndex > slides.children.length-2){
-    slideIndex = 0;
-  }
-},3000);
+  if(i>2) i=0;
+},3500);
 
-// FONDO FESTIVO
+// FONDO FINO
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
-let balls=[];
-
-for(let i=0;i<40;i++){
-  balls.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*20+10,
-    speed:Math.random()*0.3,
-    alpha:Math.random()*0.5+0.3
-  });
+let p=[];
+for(let i=0;i<60;i++){
+  p.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2,s:Math.random()*0.3});
 }
 
 function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  balls.forEach(b=>{
-    let g = ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);
-    g.addColorStop(0,`rgba(255,215,0,${b.alpha})`);
-    g.addColorStop(1,"transparent");
-
-    ctx.fillStyle=g;
+  p.forEach(e=>{
     ctx.beginPath();
-    ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+    ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
+    ctx.fillStyle="rgba(212,175,55,0.5)";
     ctx.fill();
 
-    b.y += b.speed;
-
-    if(b.y > canvas.height){
-      b.y = 0;
-      b.x = Math.random()*canvas.width;
-    }
+    e.y+=e.s;
+    if(e.y>innerHeight) e.y=0;
   });
 }
 
