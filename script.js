@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
 const audio = document.getElementById("audio");
-let musicOn = false;
 
 // LOADER
 setTimeout(()=>{
@@ -10,7 +9,7 @@ setTimeout(()=>{
 
 // SOBRE
 window.openEnvelope = function(){
-  document.querySelector(".env").classList.add("open");
+  document.querySelector(".card").classList.add("open");
 
   setTimeout(()=>{
     document.getElementById("envelope").style.display="none";
@@ -20,12 +19,10 @@ window.openEnvelope = function(){
 
 // ENTRAR
 window.enter = function(withMusic){
-  musicOn = withMusic;
-
   document.getElementById("musicChoice").style.display="none";
   document.getElementById("app").style.display="block";
 
-  if(musicOn){
+  if(withMusic){
     audio.volume=0;
     audio.play();
 
@@ -38,27 +35,6 @@ window.enter = function(withMusic){
 
   reveal();
 }
-
-// AUDIO
-window.toggleMusic = function(){
-  if(audio.paused) audio.play();
-  else audio.pause();
-}
-
-// COUNTDOWN
-const target = new Date("July 11, 2026 21:00:00").getTime();
-
-setInterval(()=>{
-  const now = new Date().getTime();
-  const diff = target-now;
-
-  const d = Math.floor(diff/(1000*60*60*24));
-  const h = Math.floor((diff/(1000*60*60))%24);
-  const m = Math.floor((diff/(1000*60))%60);
-
-  document.getElementById("countdown").innerHTML =
-    `${d} días · ${h} hs · ${m} min`;
-},1000);
 
 // SCROLL
 function reveal(){
@@ -82,33 +58,5 @@ setInterval(()=>{
 
   if(i>2) i=0;
 },3000);
-
-// FONDO
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-
-let p=[];
-for(let i=0;i<30;i++){
-  p.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2,s:Math.random()*0.2});
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  p.forEach(e=>{
-    ctx.beginPath();
-    ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
-    ctx.fillStyle="rgba(212,175,55,0.25)";
-    ctx.fill();
-
-    e.y+=e.s;
-    if(e.y>innerHeight) e.y=0;
-  });
-}
-
-setInterval(draw,30);
 
 });
