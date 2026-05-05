@@ -23,20 +23,13 @@ window.enter = function(withMusic){
   document.getElementById("app").style.display="block";
 
   if(withMusic){
-    audio.volume=0;
     audio.play();
-
-    let v=0;
-    let i=setInterval(()=>{
-      if(v<0.3){ v+=0.02; audio.volume=v; }
-      else clearInterval(i);
-    },100);
   }
 
   reveal();
 }
 
-// SCROLL
+// REVEAL
 function reveal(){
   document.querySelectorAll(".reveal").forEach(el=>{
     if(el.getBoundingClientRect().top < window.innerHeight-100){
@@ -47,16 +40,18 @@ function reveal(){
 
 window.addEventListener("scroll", reveal);
 
-// SLIDER
-let i=0;
+// 🔥 SLIDER FUNCIONAL REAL
+let index = 0;
+
 setInterval(()=>{
-  const s=document.getElementById("slides");
-  if(!s) return;
+  const track = document.getElementById("track");
+  const imgs = track.children.length;
 
-  i++;
-  s.style.transform=`translateX(-${i*280}px)`;
+  index++;
+  if(index >= imgs) index = 0;
 
-  if(i>2) i=0;
+  track.style.transform = `translateX(-${index * 280}px)`;
+
 },3000);
 
 });
