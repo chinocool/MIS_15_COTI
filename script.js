@@ -5,7 +5,7 @@ const audio = document.getElementById("audio");
 // LOADER
 setTimeout(()=>{
   document.getElementById("loader").style.display="none";
-},1000);
+},800);
 
 // SOBRE
 window.openEnvelope = function(){
@@ -25,33 +25,23 @@ window.enter = function(withMusic){
   if(withMusic){
     audio.play();
   }
-
-  reveal();
 }
 
-// REVEAL
-function reveal(){
-  document.querySelectorAll(".reveal").forEach(el=>{
-    if(el.getBoundingClientRect().top < window.innerHeight-100){
-      el.classList.add("active");
-    }
-  });
-}
-
-window.addEventListener("scroll", reveal);
-
-// 🔥 SLIDER FUNCIONAL REAL
+// 🔥 SLIDER REAL FUNCIONANDO
 let index = 0;
 
 setInterval(()=>{
   const track = document.getElementById("track");
-  const imgs = track.children.length;
+  const images = track.children.length;
 
   index++;
-  if(index >= imgs) index = 0;
 
-  track.style.transform = `translateX(-${index * 280}px)`;
+  if(index >= images){
+    index = 0;
+  }
 
-},3000);
+  track.style.transform = `translateX(-${index * 300}px)`;
+
+},2500);
 
 });
