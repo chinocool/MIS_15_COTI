@@ -11,40 +11,49 @@
 
 <body>
 
+<!-- INTRO -->
 <div id="intro">
-  <div class="intro-card">
-    <h1>Constanza</h1>
+  <div class="intro-overlay"></div>
+
+  <div class="intro-content">
+    <h1 class="lux">Constanza</h1>
     <p>Mis 15 años</p>
-    <button onclick="entrar()">Entrar</button>
+
+    <div class="buttons">
+      <button onclick="enter(true)">Entrar con música</button>
+      <button onclick="enter(false)">Entrar sin música</button>
+    </div>
   </div>
 </div>
 
+<!-- AUDIO -->
 <audio id="audio" loop>
   <source src="media/musica/musica15coti.mp3">
 </audio>
 
+<!-- APP -->
 <div id="app">
 
 <section class="hero">
-  <h1>Constanza</h1>
-  <p>11 de Julio 2026</p>
+  <h1 class="lux big">Constanza</h1>
+  <p class="subtitle">11 · 07 · 2026</p>
 </section>
 
-<section>
-  <h2>Cuenta regresiva</h2>
+<section class="section">
+  <h2>Faltan</h2>
   <div id="countdown"></div>
 </section>
 
-<section>
+<section class="section">
   <h2>Lugar</h2>
   <p>Salón A.E.F.I.P.</p>
-  <a href="https://maps.app.goo.gl/2fHLRixuznUjLptz8" target="_blank">
+  <a class="btn" href="https://maps.app.goo.gl/2fHLRixuznUjLptz8" target="_blank">
     Ver ubicación
   </a>
 </section>
 
-<section>
-  <h2>Fotos</h2>
+<section class="section">
+  <h2>Momentos</h2>
 
   <div class="slider">
     <div class="track" id="track">
@@ -56,8 +65,8 @@
 
 </section>
 
-<section>
-  <a href="https://wa.me/549XXXXXXXXXX" class="btn">
+<section class="section">
+  <a class="btn" href="https://wa.me/549XXXXXXXXXX">
     Confirmar asistencia
   </a>
 </section>
