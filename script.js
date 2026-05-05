@@ -1,41 +1,38 @@
 // ENTRADA
-function entrar() {
+function start(){
   document.getElementById("intro").style.display = "none";
-  document.getElementById("contenido").style.display = "block";
-
-  // activar música
   document.getElementById("music").src += "&autoplay=1";
 }
 
 // COUNTDOWN
-const fechaEvento = new Date("July 11, 2026 21:00:00").getTime();
-const contador = document.getElementById("contador");
+const target = new Date("July 11, 2026 21:00:00").getTime();
+const cd = document.getElementById("countdown");
 
 setInterval(() => {
-  const ahora = new Date().getTime();
-  const diff = fechaEvento - ahora;
+  const now = new Date().getTime();
+  const diff = target - now;
 
   const d = Math.floor(diff / (1000*60*60*24));
   const h = Math.floor((diff/(1000*60*60))%24);
   const m = Math.floor((diff/(1000*60))%60);
 
-  contador.innerHTML = `${d} días ${h} hs ${m} min`;
-}, 1000);
+  cd.innerHTML = `${d} días ${h} hs ${m} min`;
+},1000);
 
-// FADE AL HACER SCROLL
-const faders = document.querySelectorAll('.fade');
+// SCROLL ANIMATION
+const elements = document.querySelectorAll('.fade');
 
 window.addEventListener('scroll', () => {
-  faders.forEach(el => {
+  elements.forEach(el => {
     const top = el.getBoundingClientRect().top;
     if(top < window.innerHeight - 100){
-      el.classList.add('visible');
+      el.classList.add('show');
     }
   });
 });
 
-// PARTÍCULAS DORADAS
-const canvas = document.getElementById("particles");
+// PARTICULAS
+const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
@@ -43,31 +40,25 @@ canvas.height = window.innerHeight;
 
 let particles = [];
 
-for(let i=0;i<80;i++){
+for(let i=0;i<100;i++){
   particles.push({
     x: Math.random()*canvas.width,
     y: Math.random()*canvas.height,
     r: Math.random()*2,
-    d: Math.random()*1
+    v: Math.random()*0.5
   });
 }
 
 function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle = "gold";
+  ctx.fillStyle = "#d4af37";
 
-  particles.forEach(p => {
+  particles.forEach(p=>{
     ctx.beginPath();
     ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
     ctx.fill();
-  });
 
-  update();
-}
-
-function update(){
-  particles.forEach(p => {
-    p.y += p.d;
+    p.y += p.v;
     if(p.y > canvas.height){
       p.y = 0;
       p.x = Math.random()*canvas.width;
@@ -75,4 +66,4 @@ function update(){
   });
 }
 
-setInterval(draw,33);
+setInterval(draw, 30);
