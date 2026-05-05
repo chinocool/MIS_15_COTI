@@ -3,6 +3,7 @@ body {
   background: black;
   color: #d4af37;
   font-family: 'Montserrat', sans-serif;
+  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
@@ -18,66 +19,97 @@ body {
   z-index: 100;
 }
 
-.intro-content h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 60px;
+.lux-title {
+  font-family: 'Playfair Display';
+  font-size: 70px;
+  letter-spacing: 3px;
+  animation: fadeUp 1.5s ease;
+}
+
+.lux-sub {
+  margin-top: 10px;
+  opacity: 0.7;
 }
 
 button {
+  margin-top: 30px;
+  padding: 12px 30px;
   border: 1px solid gold;
   background: transparent;
   color: gold;
-  padding: 12px 30px;
-  margin-top: 20px;
   cursor: pointer;
+  transition: 0.4s;
 }
 
-/* BLOQUES */
-.block {
+button:hover {
+  background: gold;
+  color: black;
+  transform: scale(1.05);
+}
+
+/* SECCIONES */
+.section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: 1s;
 }
 
 /* HERO */
-.hero {
-  text-align: center;
-}
-
 .title {
-  font-size: 70px;
+  font-size: 80px;
   font-family: 'Playfair Display';
 }
 
 .subtitle {
-  letter-spacing: 4px;
+  letter-spacing: 5px;
 }
 
 /* BOTONES */
-a {
-  border: 1px solid gold;
+.btn {
+  margin-top: 20px;
   padding: 12px 30px;
+  border: 1px solid gold;
   text-decoration: none;
   color: gold;
+  transition: 0.4s;
 }
 
-a:hover {
+.btn:hover {
   background: gold;
   color: black;
+  transform: scale(1.1);
+}
+
+/* EFECTO GLOW */
+.glow {
+  box-shadow: 0 0 10px rgba(212,175,55,0.5);
+}
+
+/* BOTÓN PRINCIPAL */
+.main-btn {
+  font-size: 18px;
+  padding: 15px 40px;
+}
+
+/* REVEAL SUAVE */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 1.2s ease;
 }
 
 /* ANIMACIONES */
-.fade {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: 1s;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes fadeUp {
+  from {opacity:0; transform: translateY(40px);}
+  to {opacity:1; transform: translateY(0);}
 }
 
 /* PARTICLES */
