@@ -207,7 +207,8 @@ button:hover, .btn:hover {
   max-width:100%;
   will-change:transform;
 /*agregadooo*/
-  justify-content:center; /* 👈 clave */
+  /*justify-content:center;  👈 clave */
+  justify-content:flex-start;
   align-items:center;
 }
 
