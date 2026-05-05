@@ -62,46 +62,61 @@ setInterval(()=>{
 const slider = document.getElementById("slider");
 const track = document.getElementById("track");
 
-let isDown = false;
-let startX;
-let currentX = 0;
+let isDragging = false;
+let startX = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
 let velocity = 0;
-let animationFrame;
+let animationID;
 
+// TOUCH START
 slider.addEventListener("touchstart", e=>{
-  isDown = true;
+  isDragging = true;
   startX = e.touches[0].clientX;
-  cancelAnimationFrame(animationFrame);
+  cancelAnimationFrame(animationID);
 });
 
+// TOUCH MOVE
 slider.addEventListener("touchmove", e=>{
-  if(!isDown) return;
+  if(!isDragging) return;
 
-  const x = e.touches[0].clientX;
-  const walk = x - startX;
+  const currentX = e.touches[0].clientX;
+  const diff = currentX - startX;
 
-  velocity = walk * 0.3;
-  currentX += velocity;
+  velocity = diff * 0.3;
+  currentTranslate = prevTranslate + diff;
 
-  track.style.transform = `translateX(${currentX}px)`;
-
-  startX = x;
+  track.style.transform = `translateX(${currentTranslate}px)`;
 });
 
+// TOUCH END
 slider.addEventListener("touchend", ()=>{
-  isDown = false;
+  isDragging = false;
+  prevTranslate = currentTranslate;
   momentum();
 });
 
 // INERCIA
 function momentum(){
   velocity *= 0.95;
+  currentTranslate += velocity;
 
-  currentX += velocity;
-  track.style.transform = `translateX(${currentX}px)`;
+  // LIMITES (no se va al infinito)
+  const maxTranslate = 0;
+  const minTranslate = -(track.scrollWidth - slider.offsetWidth);
+
+  if(currentTranslate > maxTranslate){
+    currentTranslate = maxTranslate;
+  }
+
+  if(currentTranslate < minTranslate){
+    currentTranslate = minTranslate;
+  }
+
+  track.style.transform = `translateX(${currentTranslate}px)`;
 
   if(Math.abs(velocity) > 0.3){
-    animationFrame = requestAnimationFrame(momentum);
+    animationID = requestAnimationFrame(momentum);
   }
 }
 
