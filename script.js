@@ -171,14 +171,49 @@ setInterval(draw,30);
 
 window.copyAlias = function(){
 
-  const text = document.getElementById("alias-text").innerText;
+  const text = document.getElementById("alias-value").innerText;
 
-  navigator.clipboard.writeText(text).then(()=>{
-    alert("Alias copiado 💛");
-  }).catch(()=>{
-    alert("No se pudo copiar, intentá manualmente");
-  });
+  // método moderno
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text)
+      .then(()=>{
+        showCopyFeedback();
+      })
+      .catch(()=>{
+        fallbackCopy(text);
+      });
+  } else {
+    fallbackCopy(text);
+  }
 
+}
+
+// fallback universal
+function fallbackCopy(text){
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    document.execCommand("copy");
+    showCopyFeedback();
+  } catch(err){
+    alert("No se pudo copiar 😢");
+  }
+
+  document.body.removeChild(textarea);
+}
+
+// feedback lindo
+function showCopyFeedback(){
+  const btn = document.querySelector(".copy-btn");
+  btn.innerText = "Copiado ✓";
+
+  setTimeout(()=>{
+    btn.innerText = "Copiar alias";
+  },1500);
 }
   
 });
