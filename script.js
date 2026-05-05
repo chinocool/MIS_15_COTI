@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
 //////////////////////////////////////////////////
 
 window.enter = function(withMusic){
-
   document.getElementById("intro").style.display="none";
   document.getElementById("app").style.display="block";
  
@@ -80,7 +79,7 @@ setInterval(()=>{
 },1000);
 
 //////////////////////////////////////////////////
-// SLIDER INFINITO PRO
+// SLIDER PRO (INFINITO + SNAP)
 //////////////////////////////////////////////////
 
 const slider = document.getElementById("slider");
@@ -91,17 +90,13 @@ let current = 0;
 let isDown = false;
 
 function setupInfinite(){
-
   const items = Array.from(track.children);
 
-  // clonar solo una vez cada lado (no duplicar todo en cada lado)
   items.forEach(item=>{
     const clone = item.cloneNode(true);
     track.appendChild(clone);
   });
 
-  // posicion inicial
-  current = 0;
   track.style.transform = `translateX(${current}px)`;
 }
 
@@ -114,42 +109,69 @@ if(slider){
 
   slider.addEventListener("touchmove", e=>{
     if(!isDown) return;
+
     const diff = e.touches[0].clientX - startX;
     track.style.transform = `translateX(${current + diff}px)`;
   });
 
   slider.addEventListener("touchend", e=>{
     isDown = false;
+
     const diff = e.changedTouches[0].clientX - startX;
     current += diff;
 
-    fixLoop();
-    setActive();
+    snapToClosest();
   });
 }
 
-function fixLoop(){
-  const itemWidth = track.querySelector("img").offsetWidth + 20; // gap
-  const totalItems = track.children.length;
-  const visibleItems = totalItems / 2;
+function snapToClosest(){
 
-  const maxScroll = itemWidth * visibleItems;
+  const images = track.querySelectorAll("img");
+  const sliderRect = slider.getBoundingClientRect();
+  const center = sliderRect.left + sliderRect.width / 2;
 
-  if(Math.abs(current) >= maxScroll){
-    current = 0;
-    track.style.transition = "none";
+  let closest = null;
+  let minDist = Infinity;
+
+  images.forEach(img=>{
+    const rect = img.getBoundingClientRect();
+    const imgCenter = rect.left + rect.width / 2;
+
+    const dist = Math.abs(center - imgCenter);
+
+    if(dist < minDist){
+      minDist = dist;
+      closest = img;
+    }
+  });
+
+  if(closest){
+    const rect = closest.getBoundingClientRect();
+    const imgCenter = rect.left + rect.width / 2;
+    const offset = center - imgCenter;
+
+    current += offset;
+
+    track.style.transition = "transform .4s ease";
     track.style.transform = `translateX(${current}px)`;
 
-    // fuerza reflow para que no salte
-    track.offsetHeight;
-
-    track.style.transition = ".3s ease";
+    setTimeout(()=>{
+      track.style.transition = "none";
+    },400);
   }
+
+  fixLoop();
+  setActive();
 }
 
-//////////////////////////////////////////////////
-// ACTIVO (CENTRO)
-//////////////////////////////////////////////////
+function fixLoop(){
+  const width = track.scrollWidth / 2;
+
+  if(Math.abs(current) >= width){
+    current = 0;
+    track.style.transform = `translateX(${current}px)`;
+  }
+}
 
 function setActive(){
 
@@ -176,7 +198,6 @@ setTimeout(()=>{
 },300);
 
 slider.addEventListener("touchmove", setActive);
-slider.addEventListener("touchend", setActive);
 window.addEventListener("resize", setActive);
 
 //////////////////////////////////////////////////
