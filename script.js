@@ -1,14 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 🎬 carga premium
-  /*window.addEventListener("load", () => {
-    document.body.classList.add("loaded");
-  });
-  
-  // fallback por si load no dispara rápido
-  setTimeout(() => {
-    document.body.classList.add("loaded");
-  }, 1200);*/
- 
+
 //////////////////////////////////////////////////
 // ENTER
 //////////////////////////////////////////////////
@@ -25,11 +16,12 @@ window.enter = function(withMusic){
   }
 }
 
-
 //////////////////////////////////////////////////
-// toggle Music
-////////////////////////////////////////////////// 
+// MUSIC
+//////////////////////////////////////////////////
+
 let isPlaying = false;
+
 window.toggleMusic = function(){
   const audio = document.getElementById("audio");
   const btn = document.getElementById("music-control");
@@ -39,26 +31,20 @@ window.toggleMusic = function(){
   if(isPlaying){
     audio.pause();
     isPlaying = false;
-
     btn.classList.remove("active");
     btn.classList.add("off");
     btn.innerHTML = "🔇";
-
   } else {
-
     audio.volume = 0.4;
 
     audio.play().then(()=>{
       isPlaying = true;
-
       btn.classList.remove("off");
       btn.classList.add("active");
       btn.innerHTML = "🔊";
-
     }).catch(()=>{
       alert("Tocá nuevamente para activar la música");
     });
-
   }
 }
 
@@ -80,42 +66,21 @@ setInterval(()=>{
   const m = Math.floor((diff/(1000*60))%60);
   const s = Math.floor((diff / 1000) % 60);
 
-  //el.innerHTML = `${d} días · ${h} hs · ${m} min · ${s} seg <br>días hs min seg`;
   el.innerHTML = `
-  <div class="countdown">
-
-    <div class="cd-item">
-      <span class="cd-value">${d}</span>
-      <span class="cd-label">Días</span>
+    <div class="countdown">
+      <div class="cd-item"><span class="cd-value">${d}</span><span class="cd-label">Días</span></div>
+      <div class="cd-sep"></div>
+      <div class="cd-item"><span class="cd-value">${h}</span><span class="cd-label">Hs</span></div>
+      <div class="cd-sep"></div>
+      <div class="cd-item"><span class="cd-value">${m}</span><span class="cd-label">Min</span></div>
+      <div class="cd-sep"></div>
+      <div class="cd-item"><span class="cd-value">${s}</span><span class="cd-label">Seg</span></div>
     </div>
-
-    <div class="cd-sep"></div>
-
-    <div class="cd-item">
-      <span class="cd-value">${h}</span>
-      <span class="cd-label">Hs</span>
-    </div>
-
-    <div class="cd-sep"></div>
-
-    <div class="cd-item">
-      <span class="cd-value">${m}</span>
-      <span class="cd-label">Min</span>
-    </div>
-
-    <div class="cd-sep"></div>
-
-    <div class="cd-item">
-      <span class="cd-value">${s}</span>
-      <span class="cd-label">Seg</span>
-    </div>
-
-  </div>
-`;
+  `;
 },1000);
 
 //////////////////////////////////////////////////
-// SLIDER TOUCH
+// SLIDER INFINITO PRO
 //////////////////////////////////////////////////
 
 const slider = document.getElementById("slider");
@@ -123,23 +88,93 @@ const track = document.getElementById("track");
 
 let startX = 0;
 let current = 0;
+let isDown = false;
+
+function setupInfinite(){
+
+  const items = track.querySelectorAll("img");
+
+  items.forEach(item=>{
+    const cloneStart = item.cloneNode(true);
+    const cloneEnd = item.cloneNode(true);
+
+    track.insertBefore(cloneStart, track.firstChild);
+    track.appendChild(cloneEnd);
+  });
+
+  const width = track.scrollWidth / 3;
+  current = -width;
+  track.style.transform = `translateX(${current}px)`;
+}
 
 if(slider){
 
   slider.addEventListener("touchstart", e=>{
+    isDown = true;
     startX = e.touches[0].clientX;
   });
 
   slider.addEventListener("touchmove", e=>{
+    if(!isDown) return;
     const diff = e.touches[0].clientX - startX;
     track.style.transform = `translateX(${current + diff}px)`;
   });
 
   slider.addEventListener("touchend", e=>{
+    isDown = false;
     const diff = e.changedTouches[0].clientX - startX;
     current += diff;
+
+    fixLoop();
+    setActive();
   });
 }
+
+function fixLoop(){
+  const width = track.scrollWidth / 3;
+
+  if(current > 0){
+    current = -width;
+  }
+
+  if(current < -width * 2){
+    current = -width;
+  }
+
+  track.style.transform = `translateX(${current}px)`;
+}
+
+//////////////////////////////////////////////////
+// ACTIVO (CENTRO)
+//////////////////////////////////////////////////
+
+function setActive(){
+
+  const sliderRect = slider.getBoundingClientRect();
+  const center = sliderRect.left + sliderRect.width / 2;
+
+  const images = document.querySelectorAll(".track img");
+
+  images.forEach(img=>{
+    const rect = img.getBoundingClientRect();
+    const imgCenter = rect.left + rect.width / 2;
+
+    if(Math.abs(center - imgCenter) < rect.width / 2){
+      img.classList.add("active");
+    } else {
+      img.classList.remove("active");
+    }
+  });
+}
+
+setTimeout(()=>{
+  setupInfinite();
+  setActive();
+},300);
+
+slider.addEventListener("touchmove", setActive);
+slider.addEventListener("touchend", setActive);
+window.addEventListener("resize", setActive);
 
 //////////////////////////////////////////////////
 // GLITTER
@@ -178,30 +213,26 @@ function draw(){
 
 setInterval(draw,30);
 
+//////////////////////////////////////////////////
+// COPY ALIAS
+//////////////////////////////////////////////////
+
 window.copyAlias = function(){
 
   const text = document.getElementById("alias-value").innerText;
 
-  // método moderno
   if(navigator.clipboard && window.isSecureContext){
     navigator.clipboard.writeText(text)
-      .then(()=>{
-        showCopyFeedback();
-      })
-      .catch(()=>{
-        fallbackCopy(text);
-      });
+      .then(()=>showCopyFeedback())
+      .catch(()=>fallbackCopy(text));
   } else {
     fallbackCopy(text);
   }
-
 }
 
-// fallback universal
 function fallbackCopy(text){
   const textarea = document.createElement("textarea");
   textarea.value = text;
-
   document.body.appendChild(textarea);
   textarea.select();
 
@@ -215,7 +246,6 @@ function fallbackCopy(text){
   document.body.removeChild(textarea);
 }
 
-// feedback lindo
 function showCopyFeedback(){
   const btn = document.querySelector(".copy-btn");
   btn.innerText = "Copiado ✓";
@@ -225,33 +255,4 @@ function showCopyFeedback(){
   },1500);
 }
 
-//////////////////////////////////////////////////
-// EFECTO DE FOTOS
-//////////////////////////////////////////////////
-function setActive(){
-  const sliderRect = slider.getBoundingClientRect();
-  const center = sliderRect.left + sliderRect.width / 2;
-
-  const images = document.querySelectorAll(".track img");
-
-  images.forEach(img => {
-    const rect = img.getBoundingClientRect();
-    const imgCenter = rect.left + rect.width / 2;
-
-    if(Math.abs(center - imgCenter) < rect.width / 2){
-      img.classList.add("active");
-    } else {
-      img.classList.remove("active");
-    }
-  });
-}
-
-// correr al cargar
-setTimeout(setActive, 300);
-
-// correr cuando se mueve el slider
-slider.addEventListener("touchmove", setActive);
-slider.addEventListener("touchend", setActive);
-window.addEventListener("resize", setActive);
-  
 });
