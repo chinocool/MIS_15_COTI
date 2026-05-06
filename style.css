@@ -172,7 +172,9 @@ button:hover, .btn:hover {
   padding:100px 20px;
   text-align:center;
 
-  max-width:100%;
+  /*max-width:100%;*/
+  max-width:1000px;
+  margin:0 auto;
   overflow:hidden;
 
   opacity:0;
