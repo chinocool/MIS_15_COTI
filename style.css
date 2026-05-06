@@ -405,7 +405,8 @@ canvas {
 ========================= */
 .hashtag-box {
   margin-top:15px;
-  font-size:20px;      /* apenas más grande que el texto */
+  margin-bottom:25px; 
+  font-size:22px;      /* apenas más grande que el texto */
   color:#fff;          /* blanco limpio */
   letter-spacing:1px;
 }
@@ -413,7 +414,6 @@ canvas {
 /* BOTÓN debajo con espacio */
 .btn.instagram {
   margin-top:20px;
-
   background:linear-gradient(
     45deg,
     #feda75,
@@ -422,10 +422,8 @@ canvas {
     #962fbf,
     #4f5bd5
   );
-
   color:#fff;
   border:none;
-
   transition:all 0.3s ease;
 }
 
