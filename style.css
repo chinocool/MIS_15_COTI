@@ -197,8 +197,10 @@ button:hover, .btn:hover {
 .slider {
   overflow:hidden;
   touch-action:pan-y;
-  max-width:100%;
+  /*max-width:100%;*/
   cursor:grab;
+  max-width:900px;   /* 👈 controla todo */
+  margin:0 auto;
 }
 
 .slider:active {
@@ -216,16 +218,6 @@ button:hover, .btn:hover {
 }
 
 /*.track img {
-  width:clamp(180px, 55vw, 260px);
-  height:auto;
-  border-radius:16px;
-  object-fit:cover;
-  opacity:1; /* 👈 sin opacidad */
-  transform:scale(0.85);
-  transition:all 0.4s ease;
-}*/
-
-.track img {
   width:180px;        /* 👈 tamaño fijo real */
   height:240px;       /* 👈 proporción consistente */
 
@@ -237,6 +229,16 @@ button:hover, .btn:hover {
     transform 0.35s ease,
     filter 0.35s ease,
     box-shadow 0.35s ease;
+}*/
+
+.track img {
+  width:180px;
+  height:240px;
+
+  object-fit:cover;
+  border-radius:16px;
+
+  transition:all 0.4s ease;
 }
 
 .track img.active {
@@ -251,10 +253,10 @@ button:hover, .btn:hover {
   transform:scale(0.85);
 }
 
-@media (max-width:768px){
+@media (min-width:1200px){
   .track img {
-    width:140px;
-    height:200px;
+    width:160px;
+    height:220px;
   }
 }
 
