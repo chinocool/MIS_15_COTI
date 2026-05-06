@@ -198,6 +198,11 @@ button:hover, .btn:hover {
   overflow:hidden;
   touch-action:pan-y;
   max-width:100%;
+  cursor:grab;
+}
+
+.slider:active {
+  cursor:grabbing;
 }
 
 .track {
