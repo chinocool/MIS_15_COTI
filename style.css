@@ -222,15 +222,10 @@ button:hover, .btn:hover {
 
 .track img {
   width:clamp(180px, 50vw, 240px);
-  aspect-ratio: 3 / 4; /* 👈 proporción elegante */
+  height:320px;
 
-  object-fit:cover; /* 👈 recorta prolijo */
-  object-position:center;
-
+  object-fit:cover;
   border-radius:16px;
-
-  transform:scale(0.9);
-  transition:all 0.4s ease;
 }
 
 .track img.active {
