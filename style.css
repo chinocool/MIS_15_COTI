@@ -406,7 +406,7 @@ canvas {
 .hashtag-box {
   margin-top:15px;
   margin-bottom:25px; 
-  font-size:22px;      /* apenas más grande que el texto */
+  font-size:30px;      /* apenas más grande que el texto */
   color:#fff;          /* blanco limpio */
   letter-spacing:1px;
 }
