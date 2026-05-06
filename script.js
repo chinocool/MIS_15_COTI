@@ -9,9 +9,7 @@ window.enter = function(withMusic){
   document.getElementById("app").style.display="block";
  
   if(withMusic){
-    setTimeout(()=>{
-      toggleMusic();
-    },300);
+    setTimeout(()=> toggleMusic(),300);
   }
 }
 
@@ -35,14 +33,11 @@ window.toggleMusic = function(){
     btn.innerHTML = "🔇";
   } else {
     audio.volume = 0.4;
-
     audio.play().then(()=>{
       isPlaying = true;
       btn.classList.remove("off");
       btn.classList.add("active");
       btn.innerHTML = "🔊";
-    }).catch(()=>{
-      alert("Tocá nuevamente para activar la música");
     });
   }
 }
@@ -57,13 +52,13 @@ setInterval(()=>{
   const el = document.getElementById("countdown");
   if(!el) return;
 
-  const now = new Date().getTime();
+  const now = Date.now();
   const diff = target - now;
 
   const d = Math.floor(diff/(1000*60*60*24));
   const h = Math.floor((diff/(1000*60*60))%24);
   const m = Math.floor((diff/(1000*60))%60);
-  const s = Math.floor((diff / 1000) % 60);
+  const s = Math.floor((diff/1000)%60);
 
   el.innerHTML = `
     <div class="countdown">
@@ -74,23 +69,20 @@ setInterval(()=>{
       <div class="cd-item"><span class="cd-value">${m}</span><span class="cd-label">Min</span></div>
       <div class="cd-sep"></div>
       <div class="cd-item"><span class="cd-value">${s}</span><span class="cd-label">Seg</span></div>
-    </div>
-  `;
+    </div>`;
 },1000);
 
 //////////////////////////////////////////////////
-// SLIDER ULTRA PRO (APP LEVEL)
+// SLIDER PRO
 //////////////////////////////////////////////////
 
 const slider = document.getElementById("slider");
 const track = document.getElementById("track");
 
-let startX = 0;
 let current = 0;
 let velocity = 0;
-let lastX = 0;
 let isDown = false;
-let autoPlayInterval;
+let startX = 0;
 
 //////////////////////////////////////////////////
 // SETUP INFINITO
@@ -98,247 +90,155 @@ let autoPlayInterval;
 
 function setupInfinite(){
   const items = Array.from(track.children);
-
   items.forEach(item=>{
-    const clone = item.cloneNode(true);
-    track.appendChild(clone);
+    track.appendChild(item.cloneNode(true));
   });
 }
 
 //////////////////////////////////////////////////
-// TOUCH
+// TOUCH / DRAG
 //////////////////////////////////////////////////
 
-if(slider){
+slider.addEventListener("touchstart", e=>{
+  isDown = true;
+  startX = e.touches[0].clientX;
+  stopAuto();
+});
 
-  slider.addEventListener("touchstart", e=>{
-    isDown = true;
-    startX = e.touches[0].clientX;
-    lastX = startX;
-    velocity = 0;
-    stopAutoplay();
-  });
+slider.addEventListener("touchmove", e=>{
+  if(!isDown) return;
 
-  slider.addEventListener("touchmove", e=>{
-    if(!isDown) return;
+  let x = e.touches[0].clientX;
+  velocity = x - startX;
+  startX = x;
 
-    const x = e.touches[0].clientX;
-    const diff = x - startX;
+  current += velocity;
+  update();
+});
 
-    velocity = x - lastX;
-    lastX = x;
+slider.addEventListener("touchend", ()=>{
+  isDown = false;
+  startAuto();
+});
 
-    track.style.transform = `translateX(${current + diff}px)`;
-  });
-
-  slider.addEventListener("touchend", e=>{
-    isDown = false;
-
-    const diff = e.changedTouches[0].clientX - startX;
-    current += diff;
-
-    applyMomentum();
-    startAutoplay();
-  });
-}
-  
 //////////////////////////////////////////////////
-// MOUSE DRAG (DESKTOP)
+// MOUSE
 //////////////////////////////////////////////////
-let isMouseDown = false;
-if(slider){
-  slider.addEventListener("mousedown", e=>{
-    isMouseDown = true;
-    startX = e.clientX;
-    slider.style.cursor = "grabbing";
-  });
 
-  slider.addEventListener("mousemove", e=>{
-    if(!isMouseDown) return;
+slider.addEventListener("mousedown", e=>{
+  isDown = true;
+  startX = e.clientX;
+  stopAuto();
+});
 
-    const diff = e.clientX - startX;
-    track.style.transform = `translateX(${current + diff}px)`;
-  });
+slider.addEventListener("mousemove", e=>{
+  if(!isDown) return;
 
-  slider.addEventListener("mouseup", e=>{
-    if(!isMouseDown) return;
+  let x = e.clientX;
+  velocity = x - startX;
+  startX = x;
 
-    isMouseDown = false;
+  current += velocity;
+  update();
+});
 
-    const diff = e.clientX - startX;
-    current += diff;
+slider.addEventListener("mouseup", ()=>{
+  isDown = false;
+  startAuto();
+});
 
-    snapToClosest();
-    slider.style.cursor = "grab";
-  });
+slider.addEventListener("mouseleave", ()=>{
+  isDown = false;
+});
 
-  slider.addEventListener("mouseleave", ()=>{
-    isMouseDown = false;
-    slider.style.cursor = "grab";
-  });
+//////////////////////////////////////////////////
+// AUTOPLAY CONTINUO (SIN PAUSAS)
+//////////////////////////////////////////////////
 
+let autoRAF;
+
+function autoMove(){
+  current -= 0.4; // 👈 velocidad continua suave
+  update();
+  autoRAF = requestAnimationFrame(autoMove);
 }
 
+function startAuto(){
+  cancelAnimationFrame(autoRAF);
+  autoMove();
+}
+
+function stopAuto(){
+  cancelAnimationFrame(autoRAF);
+}
+
 //////////////////////////////////////////////////
-// INERCIA REAL
+// CONTROLES TECLADO
 //////////////////////////////////////////////////
 
-function applyMomentum(){
-
-  let momentum = velocity * 4;
-
-  let target = current + momentum;
-
-  // interpolación suave
-  let start = current;
-  let startTime = null;
-
-  function animate(time){
-    if(!startTime) startTime = time;
-    let progress = (time - startTime) / 600;
-
-    if(progress > 1) progress = 1;
-
-    // easing suave
-    let ease = 1 - Math.pow(1 - progress, 3);
-
-    current = start + (target - start) * ease;
-    track.style.transform = `translateX(${current}px)`;
-
-    if(progress < 1){
-      requestAnimationFrame(animate);
-    } else {
-      snapToClosest();
-    }
+document.addEventListener("keydown", e=>{
+  if(e.key === "ArrowRight"){
+    current -= 120;
+    update();
   }
+  if(e.key === "ArrowLeft"){
+    current += 120;
+    update();
+  }
+});
 
-  requestAnimationFrame(animate);
+//////////////////////////////////////////////////
+// SCROLL MOUSE (PRO)
+//////////////////////////////////////////////////
+
+slider.addEventListener("wheel", e=>{
+  current -= e.deltaY * 0.5;
+  update();
+});
+
+//////////////////////////////////////////////////
+// LOOP INFINITO SUAVE
+//////////////////////////////////////////////////
+
+function fixLoop(){
+  const width = track.scrollWidth / 2;
+
+  if(current < -width) current += width;
+  if(current > 0) current -= width;
 }
 
 //////////////////////////////////////////////////
-// SNAP PERFECTO
+// UPDATE GLOBAL
 //////////////////////////////////////////////////
 
-function snapToClosest(){
-
-  const images = track.querySelectorAll("img");
-  const sliderRect = slider.getBoundingClientRect();
-  const center = sliderRect.left + sliderRect.width / 2;
-
-  let closest = null;
-  let minDist = Infinity;
-
-  images.forEach(img=>{
-    const rect = img.getBoundingClientRect();
-    const imgCenter = rect.left + rect.width / 2;
-
-    const dist = Math.abs(center - imgCenter);
-
-    if(dist < minDist){
-      minDist = dist;
-      closest = img;
-    }
-  });
-
-  if(closest){
-    const rect = closest.getBoundingClientRect();
-    const imgCenter = rect.left + rect.width / 2;
-    const offset = center - imgCenter;
-
-    current += offset;
-
-    //track.style.transition = "transform .5s cubic-bezier(.22,.61,.36,1)";
-    track.style.transition = "transform .8s cubic-bezier(0.22, 1, 0.36, 1)";
-    track.style.transform = `translateX(${current}px)`;
-
-    setTimeout(()=>{
-      track.style.transition = "none";
-    },500);
-  }
-
+function update(){
   fixLoop();
+  track.style.transform = `translateX(${current}px)`;
   setActive();
 }
 
 //////////////////////////////////////////////////
-// LOOP SIN SALTO
+// EFECTO PROFUNDIDAD
 //////////////////////////////////////////////////
 
-function fixLoop(){
-
-  const width = track.scrollWidth / 2;
-
-  if(current < -width){
-    current += width;
-    track.style.transition = "none";
-    track.style.transform = `translateX(${current}px)`;
-    track.offsetHeight;
-  }
-
-  if(current > 0){
-    current -= width;
-    track.style.transition = "none";
-    track.style.transform = `translateX(${current}px)`;
-    track.offsetHeight;
-  }
-}
-
-//////////////////////////////////////////////////
-// ACTIVO + BLUR DINÁMICO
-//////////////////////////////////////////////////
 function setActive(){
 
-  const sliderRect = slider.getBoundingClientRect();
-  const center = sliderRect.left + sliderRect.width / 2;
+  const rect = slider.getBoundingClientRect();
+  const center = rect.left + rect.width/2;
 
-  const images = document.querySelectorAll(".track img");
-
-  images.forEach(img=>{
-    const rect = img.getBoundingClientRect();
-    const imgCenter = rect.left + rect.width / 2;
+  track.querySelectorAll("img").forEach(img=>{
+    const r = img.getBoundingClientRect();
+    const imgCenter = r.left + r.width/2;
 
     const dist = Math.abs(center - imgCenter);
+    const ratio = Math.min(dist/(rect.width/2),1);
 
-    // 👉 NORMALIZAR DISTANCIA
-    const maxDist = sliderRect.width / 2;
-    const ratio = Math.min(dist / maxDist, 1);
+    const scale = 1.1 - ratio*0.25;
+    const blur = ratio*1.5;
 
-    // 💎 ESCALA PROGRESIVA
-    const scale = 1.1 - (ratio * 0.25); 
     img.style.transform = `scale(${scale})`;
-
-    // ✨ BLUR SUAVE
-    const blur = ratio * 2;
     img.style.filter = `blur(${blur}px)`;
-
-    // 🎯 DESTACAR CENTRO
-    if(ratio < 0.2){
-      img.classList.add("active");
-      img.style.zIndex = 2;
-      img.style.boxShadow = "0 20px 60px rgba(0,0,0,0.9), 0 0 20px rgba(212,175,55,0.3)";
-    } else {
-      img.classList.remove("active");
-      img.style.zIndex = 1;
-      img.style.boxShadow = "none";
-    }
   });
-}
-
-
-//////////////////////////////////////////////////
-// AUTOPLAY SUAVE
-//////////////////////////////////////////////////
-
-function startAutoplay(){
-
-  autoPlayInterval = setInterval(()=>{
-    current -= 120; // velocidad autoplay
-    snapToClosest();
-  },3000);
-}
-
-function stopAutoplay(){
-  clearInterval(autoPlayInterval);
 }
 
 //////////////////////////////////////////////////
@@ -347,94 +247,7 @@ function stopAutoplay(){
 
 setTimeout(()=>{
   setupInfinite();
-  setActive();
-  startAutoplay();
+  startAuto();
 },300);
-
-//////////////////////////////////////////////////
-// EVENTOS
-//////////////////////////////////////////////////
-
-slider.addEventListener("touchmove", setActive);
-window.addEventListener("resize", setActive);
-
-//////////////////////////////////////////////////
-// GLITTER
-//////////////////////////////////////////////////
-
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<80;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*4,
-    s:Math.random()*0.4
-  });
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle="rgba(212,175,55,0.3)";
-    ctx.fill();
-
-    p.y += p.s;
-    if(p.y > canvas.height) p.y = 0;
-  });
-}
-
-setInterval(draw,30);
-
-//////////////////////////////////////////////////
-// COPY ALIAS
-//////////////////////////////////////////////////
-
-window.copyAlias = function(){
-
-  const text = document.getElementById("alias-value").innerText;
-
-  if(navigator.clipboard && window.isSecureContext){
-    navigator.clipboard.writeText(text)
-      .then(()=>showCopyFeedback())
-      .catch(()=>fallbackCopy(text));
-  } else {
-    fallbackCopy(text);
-  }
-}
-
-function fallbackCopy(text){
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  document.body.appendChild(textarea);
-  textarea.select();
-
-  try {
-    document.execCommand("copy");
-    showCopyFeedback();
-  } catch(err){
-    alert("No se pudo copiar 😢");
-  }
-
-  document.body.removeChild(textarea);
-}
-
-function showCopyFeedback(){
-  const btn = document.querySelector(".copy-btn");
-  btn.innerText = "Copiado ✓";
-
-  setTimeout(()=>{
-    btn.innerText = "Copiar alias";
-  },1500);
-}
 
 });
