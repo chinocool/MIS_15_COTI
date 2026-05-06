@@ -123,10 +123,25 @@
 <section class="section">
   <h2 class="lux">Confirmación de asistencia</h2>
   <p class="subtitle">Es importante que confirmes tu asistencia<p> 
-  <a class="btn main" href="https://wa.me/549XXXXXXXXXX">
+  <button class="btn main" onclick="openForm()">
     Confirmar asistencia
-  </a>
+  </button>
 </section>
+
+<!-- POPUP -->
+<div id="formModal" class="modal">
+  <div class="modal-content">
+
+    <span class="close" onclick="closeForm()">✕</span>
+
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLSfk8MHnmHQzJ5oJNQJy93WzFXB6l_G8qI18nNtsB_SobnGrGA/viewform?usp=dialog"
+      width="100%" 
+      height="600">
+    </iframe>
+
+  </div>
+</div>
 
 </div>
 
