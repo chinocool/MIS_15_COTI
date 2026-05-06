@@ -141,6 +141,43 @@ if(slider){
     startAutoplay();
   });
 }
+  
+//////////////////////////////////////////////////
+// MOUSE DRAG (DESKTOP)
+//////////////////////////////////////////////////
+let isMouseDown = false;
+if(slider){
+  slider.addEventListener("mousedown", e=>{
+    isMouseDown = true;
+    startX = e.clientX;
+    slider.style.cursor = "grabbing";
+  });
+
+  slider.addEventListener("mousemove", e=>{
+    if(!isMouseDown) return;
+
+    const diff = e.clientX - startX;
+    track.style.transform = `translateX(${current + diff}px)`;
+  });
+
+  slider.addEventListener("mouseup", e=>{
+    if(!isMouseDown) return;
+
+    isMouseDown = false;
+
+    const diff = e.clientX - startX;
+    current += diff;
+
+    snapToClosest();
+    slider.style.cursor = "grab";
+  });
+
+  slider.addEventListener("mouseleave", ()=>{
+    isMouseDown = false;
+    slider.style.cursor = "grab";
+  });
+
+}
 
 //////////////////////////////////////////////////
 // INERCIA REAL
