@@ -404,28 +404,13 @@ canvas {
    HASHTAG INSTAGRAM
 ========================= */
 .hashtag-box {
-  margin:20px auto;
-  padding:15px 25px;
-
-  display:inline-block;
-
-  font-size:22px;
-  font-weight:600;
-
-  color:#d4af37;
-
-  border-radius:30px;
-
-  background:rgba(212,175,55,0.1);
-  border:1px solid rgba(212,175,55,0.4);
-
-  box-shadow:
-    0 0 15px rgba(212,175,55,0.2);
-
+  margin-top:15px;
+  font-size:20px;      /* apenas más grande que el texto */
+  color:#fff;          /* blanco limpio */
   letter-spacing:1px;
 }
 
-/* BOTÓN INSTAGRAM */
+/* BOTÓN debajo con espacio */
 .btn.instagram {
   margin-top:20px;
 
@@ -441,18 +426,11 @@ canvas {
   color:#fff;
   border:none;
 
-  box-shadow:
-    0 5px 20px rgba(0,0,0,0.6);
-
   transition:all 0.3s ease;
 }
 
 .btn.instagram:hover {
   transform:scale(1.05);
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.8),
-    0 0 20px rgba(214,41,118,0.5);
 }
 
 
