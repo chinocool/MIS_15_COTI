@@ -149,9 +149,33 @@ if(slider){
 function applyMomentum(){
 
   let momentum = velocity * 4;
-  current += momentum * 0.6;
 
-  snapToClosest();
+  let target = current + momentum;
+
+  // interpolación suave
+  let start = current;
+  let startTime = null;
+
+  function animate(time){
+    if(!startTime) startTime = time;
+    let progress = (time - startTime) / 600;
+
+    if(progress > 1) progress = 1;
+
+    // easing suave
+    let ease = 1 - Math.pow(1 - progress, 3);
+
+    current = start + (target - start) * ease;
+    track.style.transform = `translateX(${current}px)`;
+
+    if(progress < 1){
+      requestAnimationFrame(animate);
+    } else {
+      snapToClosest();
+    }
+  }
+
+  requestAnimationFrame(animate);
 }
 
 //////////////////////////////////////////////////
