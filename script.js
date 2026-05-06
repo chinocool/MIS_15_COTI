@@ -84,20 +84,12 @@ let velocity = 0;
 let isDown = false;
 let startX = 0;
 
-//////////////////////////////////////////////////
-// SETUP INFINITO
-//////////////////////////////////////////////////
-
 function setupInfinite(){
   const items = Array.from(track.children);
   items.forEach(item=>{
     track.appendChild(item.cloneNode(true));
   });
 }
-
-//////////////////////////////////////////////////
-// TOUCH / DRAG
-//////////////////////////////////////////////////
 
 slider.addEventListener("touchstart", e=>{
   isDown = true;
@@ -120,10 +112,6 @@ slider.addEventListener("touchend", ()=>{
   isDown = false;
   startAuto();
 });
-
-//////////////////////////////////////////////////
-// MOUSE
-//////////////////////////////////////////////////
 
 slider.addEventListener("mousedown", e=>{
   isDown = true;
@@ -152,13 +140,13 @@ slider.addEventListener("mouseleave", ()=>{
 });
 
 //////////////////////////////////////////////////
-// AUTOPLAY CONTINUO (SIN PAUSAS)
+// AUTOPLAY
 //////////////////////////////////////////////////
 
 let autoRAF;
 
 function autoMove(){
-  current -= 0.25; // 👈 velocidad continua suave
+  current -= 0.25;
   update();
   autoRAF = requestAnimationFrame(autoMove);
 }
@@ -173,7 +161,7 @@ function stopAuto(){
 }
 
 //////////////////////////////////////////////////
-// CONTROLES TECLADO
+// TECLADO
 //////////////////////////////////////////////////
 
 document.addEventListener("keydown", e=>{
@@ -188,54 +176,28 @@ document.addEventListener("keydown", e=>{
 });
 
 //////////////////////////////////////////////////
-// SCROLL MOUSE (PRO)
-//////////////////////////////////////////////////
-
-slider.addEventListener("wheel", e=>{
-  current -= e.deltaY * 0.5;
-  update();
-});
-
-//////////////////////////////////////////////////
-// LOOP INFINITO SUAVE
+// LOOP
 //////////////////////////////////////////////////
 
 function fixLoop(){
 
   const width = track.scrollWidth / 2;
 
-  // izquierda
   if(current < -width){
     current += width;
-
     track.style.transition = "none";
-    track.style.transform = `translateX(${current}px)`;
-
-    track.offsetHeight; // fuerza reflow
-
-    return;
+    track.offsetHeight;
   }
 
-  // derecha
   if(current > 0){
     current -= width;
-
     track.style.transition = "none";
-    track.style.transform = `translateX(${current}px)`;
-
     track.offsetHeight;
-
-    return;
   }
 }
 
-//////////////////////////////////////////////////
-// UPDATE GLOBAL
-//////////////////////////////////////////////////
-
 function update(){
   fixLoop();
-  track.style.transition = "transform 0s";
   track.style.transform = `translateX(${current}px)`;
   setActive();
 }
@@ -265,25 +227,6 @@ function setActive(){
 }
 
 //////////////////////////////////////////////////
-// GOOGLE FORM
-//////////////////////////////////////////////////
-function openForm(){
-  document.getElementById("formModal").style.display = "flex";
-}
-
-function closeForm(){
-  document.getElementById("formModal").style.display = "none";
-}
-
-// cerrar tocando afuera
-window.addEventListener("click", function(e){
-  const modal = document.getElementById("formModal");
-  if(e.target === modal){
-    modal.style.display = "none";
-  }
-});
-
-//////////////////////////////////////////////////
 // INIT
 //////////////////////////////////////////////////
 
@@ -292,4 +235,31 @@ setTimeout(()=>{
   startAuto();
 },300);
 
+});
+
+//////////////////////////////////////////////////
+// 🔥 GOOGLE FORM (GLOBAL)
+//////////////////////////////////////////////////
+
+window.openForm = function(){
+  document.getElementById("formModal").style.display = "flex";
+}
+
+window.closeForm = function(){
+  document.getElementById("formModal").style.display = "none";
+}
+
+// cerrar afuera
+window.addEventListener("click", function(e){
+  const modal = document.getElementById("formModal");
+  if(e.target === modal){
+    modal.style.display = "none";
+  }
+});
+
+// cerrar con ESC
+document.addEventListener("keydown", e=>{
+  if(e.key === "Escape"){
+    closeForm();
+  }
 });
