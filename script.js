@@ -13,6 +13,83 @@ window.enter = function(withMusic){
   }
 }
 
+  
+//////////////////////////////////////////////////
+// ✨ GLITTER BACKGROUND
+//////////////////////////////////////////////////
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+// tamaño
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+// partículas doradas
+const particles = Array.from({length:80}, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  r: Math.random() * 2 + 1,
+  s: Math.random() * 0.5 + 0.2,
+  a: Math.random() * 0.5 + 0.2
+}));
+
+// destellos
+const sparkles = Array.from({length:30}, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  size: Math.random() * 2,
+  life: Math.random() * 100
+}));
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  // glitter dorado
+  particles.forEach(p=>{
+    let g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*5);
+    g.addColorStop(0,`rgba(212,175,55,${p.a})`);
+    g.addColorStop(1,"transparent");
+
+    ctx.fillStyle=g;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r*5,0,Math.PI*2);
+    ctx.fill();
+
+    p.y += p.s;
+    p.x += Math.sin(p.y * 0.01)*0.3;
+
+    if(p.y > canvas.height){
+      p.y = 0;
+      p.x = Math.random()*canvas.width;
+    }
+  });
+
+  // sparkle (destellos)
+  sparkles.forEach(s=>{
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(255,255,255,0.9)";
+    ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+    ctx.fill();
+
+    s.life--;
+
+    if(s.life <= 0){
+      s.x = Math.random()*canvas.width;
+      s.y = Math.random()*canvas.height;
+      s.life = Math.random()*100;
+    }
+  });
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+  
+
 //////////////////////////////////////////////////
 // MUSIC
 //////////////////////////////////////////////////
