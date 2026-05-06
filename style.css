@@ -401,6 +401,63 @@ canvas {
 }
 
 /* =========================
+   POPUP GOOGLE FORM
+========================= */
+/* FONDO OSCURO */
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(6px);
+  z-index:100;
+
+  justify-content:center;
+  align-items:center;
+}
+
+/* CONTENIDO */
+.modal-content {
+  width:90%;
+  max-width:600px;
+
+  background:black;
+  border-radius:20px;
+  overflow:hidden;
+
+  position:relative;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.9),
+    0 0 30px rgba(212,175,55,0.2);
+
+  animation:fadeModal 0.4s ease;
+}
+
+/* BOTÓN CERRAR */
+.close {
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:24px;
+  cursor:pointer;
+  color:#d4af37;
+  z-index:2;
+}
+
+/* ANIMACIÓN */
+@keyframes fadeModal {
+  from {
+    opacity:0;
+    transform:scale(0.9);
+  }
+  to {
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+/* =========================
    MOBILE
 ========================= */
 @media (max-width:768px){
