@@ -413,7 +413,11 @@ canvas {
 
 /* BOTÓN debajo con espacio */
 .btn.instagram {
-  margin-top:20px;
+  position:relative;   /* 👈 evita superposición */
+  z-index:1;
+
+  margin-top:0;        /* ya usamos el margin del hashtag */
+
   background:linear-gradient(
     45deg,
     #feda75,
@@ -422,13 +426,9 @@ canvas {
     #962fbf,
     #4f5bd5
   );
+
   color:#fff;
   border:none;
-  transition:all 0.3s ease;
-}
-
-.btn.instagram:hover {
-  transform:scale(1.05);
 }
 
 
