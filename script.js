@@ -158,7 +158,7 @@ slider.addEventListener("mouseleave", ()=>{
 let autoRAF;
 
 function autoMove(){
-  current -= 0.4; // 👈 velocidad continua suave
+  current -= 0.25; // 👈 velocidad continua suave
   update();
   autoRAF = requestAnimationFrame(autoMove);
 }
@@ -201,10 +201,32 @@ slider.addEventListener("wheel", e=>{
 //////////////////////////////////////////////////
 
 function fixLoop(){
+
   const width = track.scrollWidth / 2;
 
-  if(current < -width) current += width;
-  if(current > 0) current -= width;
+  // izquierda
+  if(current < -width){
+    current += width;
+
+    track.style.transition = "none";
+    track.style.transform = `translateX(${current}px)`;
+
+    track.offsetHeight; // fuerza reflow
+
+    return;
+  }
+
+  // derecha
+  if(current > 0){
+    current -= width;
+
+    track.style.transition = "none";
+    track.style.transform = `translateX(${current}px)`;
+
+    track.offsetHeight;
+
+    return;
+  }
 }
 
 //////////////////////////////////////////////////
@@ -213,6 +235,7 @@ function fixLoop(){
 
 function update(){
   fixLoop();
+  track.style.transition = "transform 0s";
   track.style.transform = `translateX(${current}px)`;
   setActive();
 }
