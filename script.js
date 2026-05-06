@@ -286,13 +286,12 @@ function fixLoop(){
 //////////////////////////////////////////////////
 // ACTIVO + BLUR DINÁMICO
 //////////////////////////////////////////////////
-
 function setActive(){
 
   const sliderRect = slider.getBoundingClientRect();
   const center = sliderRect.left + sliderRect.width / 2;
 
-  const images = track.querySelectorAll("img");
+  const images = document.querySelectorAll(".track img");
 
   images.forEach(img=>{
     const rect = img.getBoundingClientRect();
@@ -300,18 +299,31 @@ function setActive(){
 
     const dist = Math.abs(center - imgCenter);
 
-    if(dist < rect.width / 2){
+    // 👉 NORMALIZAR DISTANCIA
+    const maxDist = sliderRect.width / 2;
+    const ratio = Math.min(dist / maxDist, 1);
+
+    // 💎 ESCALA PROGRESIVA
+    const scale = 1.1 - (ratio * 0.25); 
+    img.style.transform = `scale(${scale})`;
+
+    // ✨ BLUR SUAVE
+    const blur = ratio * 2;
+    img.style.filter = `blur(${blur}px)`;
+
+    // 🎯 DESTACAR CENTRO
+    if(ratio < 0.2){
       img.classList.add("active");
-      img.style.filter = "none";
+      img.style.zIndex = 2;
+      img.style.boxShadow = "0 20px 60px rgba(0,0,0,0.9), 0 0 20px rgba(212,175,55,0.3)";
     } else {
       img.classList.remove("active");
-
-      // 💎 blur dinámico según distancia
-      const blur = Math.min(dist / 200, 3);
-      img.style.filter = `blur(${blur}px)`;
+      img.style.zIndex = 1;
+      img.style.boxShadow = "none";
     }
   });
 }
+
 
 //////////////////////////////////////////////////
 // AUTOPLAY SUAVE
