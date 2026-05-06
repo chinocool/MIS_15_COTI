@@ -318,12 +318,20 @@ setTimeout(()=>{
 // 🔥 GOOGLE FORM (GLOBAL)
 //////////////////////////////////////////////////
 
-window.openForm = function(){
-  document.getElementById("formModal").style.display = "flex";
+window.openForm = function(url){
+  const modal = document.getElementById("formModal");
+  const frame = document.getElementById("formFrame");
+
+  frame.src = url;
+  modal.style.display = "flex";
 }
 
 window.closeForm = function(){
-  document.getElementById("formModal").style.display = "none";
+  const modal = document.getElementById("formModal");
+  const frame = document.getElementById("formFrame");
+
+  modal.style.display = "none";
+  frame.src = ""; // 👈 limpia el form
 }
 
 // cerrar afuera
