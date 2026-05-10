@@ -17,7 +17,6 @@ window.enter = function(withMusic){
     musicBtn.classList.add("active");
     setTimeout(()=> toggleMusic(),300);
   } else {
-
     musicBtn.classList.remove("active");
     musicBtn.classList.add("off");
   } 
