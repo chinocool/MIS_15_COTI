@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
 window.enter = function(withMusic){
   document.getElementById("intro").style.display="none";
   document.getElementById("app").style.display="block";
+
+  // 👇 mostrar botón audio recién acá
+  document.getElementById("music-control").style.display = "flex";
  
   if(withMusic){
     setTimeout(()=> toggleMusic(),300);
