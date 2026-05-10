@@ -652,39 +652,31 @@ button:hover, .btn:hover {
 /* línea OFF */
 #music-control::after {
   content:"";
-
   position:absolute;
-
   width:34px;
   height:2px;
-
   background:#d4af37;
-
   border-radius:2px;
-
   transform:rotate(-45deg) scaleX(0);
-
   transition:
     transform .3s ease,
     opacity .3s ease;
-
   opacity:0;
-
   box-shadow:
     0 0 8px rgba(212,175,55,0.6);
 }
 
 /* visible solo OFF */
 #music-control.off::after {
-  opacity:0.5;
+  opacity:1;
   transform:rotate(-45deg) scaleX(1);
 }
 
 /* MODO OFF */
-/*#music-control.off .audio-icon {
+#music-control.off .audio-icon {
   opacity:0.5;
   filter:none;
-}*/
+}
 
 /* =========================
    MOBILE
