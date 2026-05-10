@@ -557,9 +557,7 @@ button:hover, .btn:hover {
 .section-icon {
   width:64px;
   height:64px;
-
   margin:20px auto;
-
   background:linear-gradient(
     135deg,
     #d4af37 0%,
@@ -569,7 +567,6 @@ button:hover, .btn:hover {
   );
 
   display:block;
-
   -webkit-mask-size:contain;
   -webkit-mask-repeat:no-repeat;
   -webkit-mask-position:center;
@@ -584,6 +581,18 @@ button:hover, .btn:hover {
   transition:
     transform .3s ease,
     filter .3s ease;
+   
+  animation:floatIcon 4s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%,100% {
+    transform:translateY(0px);
+  }
+
+  50% {
+    transform:translateY(-8px);
+  }
 }
 
 /* HOVER */
