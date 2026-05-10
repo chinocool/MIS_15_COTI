@@ -582,19 +582,62 @@ button:hover, .btn:hover {
     transform .3s ease,
     filter .3s ease;
    
-  animation:
+ animation:
     revealIcon 1s ease forwards,
-    floatIcon 4s ease-in-out infinite,
+    floatIcon 4s ease-in-out infinite 1s,
     glowIcon 3s ease-in-out infinite;
+
+  will-change:
+    transform,
+    filter,
+    opacity;
 }
 
+/* ✨ APARICIÓN */
+@keyframes revealIcon {
+
+  from {
+    opacity:0;
+
+    transform:
+      translateY(20px)
+      scale(0.9);
+  }
+
+  to {
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* 💎 FLOTACIÓN SUAVE */
 @keyframes floatIcon {
+
   0%,100% {
     transform:translateY(0px);
   }
 
   50% {
     transform:translateY(-8px);
+  }
+}
+
+/* ✨ GLOW DORADO */
+@keyframes glowIcon {
+
+  0%,100% {
+
+    filter:
+      drop-shadow(0 0 8px rgba(212,175,55,0.25));
+  }
+
+  50% {
+
+    filter:
+      drop-shadow(0 0 18px rgba(212,175,55,0.55));
   }
 }
 
