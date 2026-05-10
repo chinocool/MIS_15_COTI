@@ -557,6 +557,9 @@ button:hover, .btn:hover {
 /* =========================
    ICONOS SECCIONES
 ========================= */
+/* =========================
+   ICONOS SECCIONES
+========================= */
 .section-icon {
 
   width:64px;
@@ -582,41 +585,18 @@ button:hover, .btn:hover {
   mask-repeat:no-repeat;
   mask-position:center;
 
-  opacity:0;
-
   filter:
     drop-shadow(0 0 10px rgba(212,175,55,0.35));
 
   animation:
-    revealIcon 1s ease forwards,
-    glowIcon 3s ease-in-out infinite,
-    floatIcon 4s ease-in-out infinite 1s;
-
-  will-change:
-    transform,
-    filter,
-    opacity;
+    floatIcon 4s ease-in-out infinite;
 
   transition:
     transform .3s ease,
     filter .3s ease;
 }
 
-/* ✨ APARICIÓN */
-@keyframes revealIcon {
-
-  from {
-    opacity:0;
-    scale:0.9;
-  }
-
-  to {
-    opacity:1;
-    scale:1;
-  }
-}
-
-/* 💎 FLOTACIÓN */
+/* 💎 FLOATING */
 @keyframes floatIcon {
 
   0%,100% {
@@ -625,22 +605,6 @@ button:hover, .btn:hover {
 
   50% {
     transform:translateY(-6px);
-  }
-}
-
-/* ✨ GLOW */
-@keyframes glowIcon {
-
-  0%,100% {
-
-    filter:
-      drop-shadow(0 0 8px rgba(212,175,55,0.25));
-  }
-
-  50% {
-
-    filter:
-      drop-shadow(0 0 18px rgba(212,175,55,0.55));
   }
 }
 
@@ -653,6 +617,15 @@ button:hover, .btn:hover {
 
   filter:
     drop-shadow(0 0 20px rgba(212,175,55,0.6));
+}
+
+/* MOBILE */
+@media (max-width:768px){
+
+  .section-icon {
+    width:64px;
+    height:64px;
+  }
 }
 
 /* MOBILE */
