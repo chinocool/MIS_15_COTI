@@ -554,10 +554,18 @@ button:hover, .btn:hover {
 /* =========================
    ICONOS SECCIONES
 ========================= */
+/* =========================
+   ICONOS SECCIONES
+========================= */
 .section-icon {
+
   width:64px;
   height:64px;
+
   margin:20px auto;
+
+  display:block;
+
   background:linear-gradient(
     135deg,
     #d4af37 0%,
@@ -566,7 +574,6 @@ button:hover, .btn:hover {
     #fff3b0 100%
   );
 
-  display:block;
   -webkit-mask-size:contain;
   -webkit-mask-repeat:no-repeat;
   -webkit-mask-position:center;
@@ -575,22 +582,24 @@ button:hover, .btn:hover {
   mask-repeat:no-repeat;
   mask-position:center;
 
+  opacity:0;
+
   filter:
     drop-shadow(0 0 10px rgba(212,175,55,0.35));
 
-  transition:
-    transform .3s ease,
-    filter .3s ease;
-   
- animation:
+  animation:
     revealIcon 1s ease forwards,
-    floatIcon 4s ease-in-out infinite 1s,
-    glowIcon 3s ease-in-out infinite;
+    glowIcon 3s ease-in-out infinite,
+    floatIcon 4s ease-in-out infinite 1s;
 
   will-change:
     transform,
     filter,
     opacity;
+
+  transition:
+    transform .3s ease,
+    filter .3s ease;
 }
 
 /* ✨ APARICIÓN */
@@ -598,22 +607,16 @@ button:hover, .btn:hover {
 
   from {
     opacity:0;
-
-    transform:
-      translateY(20px)
-      scale(0.9);
+    scale:0.9;
   }
 
   to {
     opacity:1;
-
-    transform:
-      translateY(0)
-      scale(1);
+    scale:1;
   }
 }
 
-/* 💎 FLOTACIÓN SUAVE */
+/* 💎 FLOTACIÓN */
 @keyframes floatIcon {
 
   0%,100% {
@@ -621,11 +624,11 @@ button:hover, .btn:hover {
   }
 
   50% {
-    transform:translateY(-8px);
+    transform:translateY(-6px);
   }
 }
 
-/* ✨ GLOW DORADO */
+/* ✨ GLOW */
 @keyframes glowIcon {
 
   0%,100% {
@@ -643,7 +646,10 @@ button:hover, .btn:hover {
 
 /* HOVER */
 .section-icon:hover {
-  transform:scale(1.05);
+
+  transform:
+    translateY(-3px)
+    scale(1.05);
 
   filter:
     drop-shadow(0 0 20px rgba(212,175,55,0.6));
@@ -651,6 +657,7 @@ button:hover, .btn:hover {
 
 /* MOBILE */
 @media (max-width:768px){
+
   .section-icon {
     width:64px;
     height:64px;
