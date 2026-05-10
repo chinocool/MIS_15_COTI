@@ -589,7 +589,7 @@ button:hover, .btn:hover {
     drop-shadow(0 0 10px rgba(212,175,55,0.35));
 
   animation:
-    floatIcon 4s ease-in-out infinite;
+    floatIcon 2s ease-in-out infinite;
 
   transition:
     transform .3s ease,
