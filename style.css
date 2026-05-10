@@ -630,6 +630,11 @@ button:hover, .btn:hover {
     drop-shadow(0 0 8px rgba(212,175,55,0.4));
 }
 
+/* ICONO OCULTO EN LA PAGINA DE INICIO */
+#music-control {
+  display:none;
+}
+
 /* ANIMACIÓN CUANDO SUENA */
 #music-control.active .audio-icon {
   animation:musicPulse 1.5s infinite;
