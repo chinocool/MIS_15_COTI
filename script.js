@@ -13,8 +13,14 @@ window.enter = function(withMusic){
   document.getElementById("music-control").style.display = "flex";
  
   if(withMusic){
+    musicBtn.classList.remove("off");
+    musicBtn.classList.add("active");
     setTimeout(()=> toggleMusic(),300);
-  }  
+  } else {
+
+    musicBtn.classList.remove("active");
+    musicBtn.classList.add("off");
+  } 
 }
 
   
