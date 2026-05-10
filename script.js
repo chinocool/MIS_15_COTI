@@ -10,7 +10,8 @@ window.enter = function(withMusic){
   document.getElementById("app").style.display="block";
 
   // 👇 mostrar botón audio recién acá
-  document.getElementById("music-control").style.display = "flex";
+  const musicBtn = document.getElementById("music-control");
+  musicBtn.style.display = "flex";
  
   if(withMusic){
     musicBtn.classList.remove("off");
