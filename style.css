@@ -582,7 +582,10 @@ button:hover, .btn:hover {
     transform .3s ease,
     filter .3s ease;
    
-  animation:floatIcon 4s ease-in-out infinite;
+  animation:
+    revealIcon 1s ease forwards,
+    floatIcon 4s ease-in-out infinite,
+    glowIcon 3s ease-in-out infinite;
 }
 
 @keyframes floatIcon {
