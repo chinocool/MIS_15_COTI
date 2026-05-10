@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // ENTER
 //////////////////////////////////////////////////
 
-let isPlaying = false;
   
 window.enter = function(withMusic){
   document.getElementById("intro").style.display="none";
@@ -12,10 +11,7 @@ window.enter = function(withMusic){
  
   if(withMusic){
     setTimeout(()=> toggleMusic(),300);
-  } 
-  else{
-    toggleMusic();
-  }
+  }  
 }
 
   
@@ -98,6 +94,7 @@ draw();
 //////////////////////////////////////////////////
 // MUSIC
 //////////////////////////////////////////////////
+let isPlaying = false;
   
 window.toggleMusic = function(){
   const audio = document.getElementById("audio");
