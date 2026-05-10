@@ -4,13 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
 // ENTER
 //////////////////////////////////////////////////
 
+let isPlaying = false;
+  
 window.enter = function(withMusic){
   document.getElementById("intro").style.display="none";
   document.getElementById("app").style.display="block";
  
   if(withMusic){
     setTimeout(()=> toggleMusic(),300);
-  } else {
+  } 
+  else{
     toggleMusic();
   }
 }
@@ -95,9 +98,7 @@ draw();
 //////////////////////////////////////////////////
 // MUSIC
 //////////////////////////////////////////////////
-
-let isPlaying = false;
-
+  
 window.toggleMusic = function(){
   const audio = document.getElementById("audio");
   const btn = document.getElementById("music-control");
