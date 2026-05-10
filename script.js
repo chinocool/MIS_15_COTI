@@ -8,9 +8,11 @@ window.enter = function(withMusic){
   document.getElementById("intro").style.display="none";
   document.getElementById("app").style.display="block";
  
-  //if(withMusic){
+  if(withMusic){
     setTimeout(()=> toggleMusic(),300);
-  //}
+  } else {
+    toggleMusic();
+  }
 }
 
   
