@@ -107,14 +107,14 @@ window.toggleMusic = function(){
     isPlaying = false;
     btn.classList.remove("active");
     btn.classList.add("off");
-    btn.innerHTML = "🔇";
+    //btn.innerHTML = "🔇";
   } else {
     audio.volume = 0.4;
     audio.play().then(()=>{
       isPlaying = true;
       btn.classList.remove("off");
       btn.classList.add("active");
-      btn.innerHTML = "🔊";
+      //btn.innerHTML = "🔊";
     });
   }
 }
